@@ -1,0 +1,35 @@
+<app-page-header
+  title="Tipos de incidencia"
+  subtitle="Consulta los diferentes tipos de incidencia y encuentra rápidamente la información que necesitas."
+  [breadcrumbs]="breadcrumbs"
+/>
+
+<section class="toolbar" aria-label="Búsqueda y filtros">
+  <app-search-input
+    class="toolbar__search"
+    [(value)]="query"
+    placeholder="Buscar tipos de incidencia..."
+    label="Buscar tipos de incidencia"
+  />
+  <app-filter-chips
+    label="¿Quién abre?"
+    [options]="openedByOptions()"
+    [allCount]="searchCount()"
+    [(selected)]="openedBy"
+  />
+</section>
+
+<p class="summary" aria-live="polite">{{ resultSummary() }}</p>
+
+@if (results().length) {
+  <app-incident-table [incidents]="results()" />
+} @else {
+  <section class="empty card" aria-labelledby="empty-title">
+    <span class="icon-tile"><svg lucideSearchX [size]="20"></svg></span>
+    <h2 id="empty-title" class="empty__title">No se han encontrado tipos de incidencia</h2>
+    <p class="empty__text">Prueba con otros términos o cambia el filtro.</p>
+    <button type="button" class="button button--secondary" (click)="clearFilters()">
+      Limpiar búsqueda y filtros
+    </button>
+  </section>
+}

@@ -1,0 +1,22 @@
+:host {
+  display: inline;
+}
+
+.rich-text__highlight {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rich-text__unconfirmed {
+  padding: 0 1px;
+  border: 1px dashed var(--color-warning-border);
+  border-radius: 4px;
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  cursor: help;
+}

@@ -1,0 +1,14 @@
+<button type="button" class="skip-link" (click)="skipToContent()">Saltar al contenido principal</button>
+
+<app-sidebar class="shell__sidebar" />
+
+@if (layout.mobileNavOpen()) {
+  <div class="shell__overlay" (click)="layout.closeMobileNav()" aria-hidden="true"></div>
+}
+
+<div class="shell__main">
+  <app-header />
+  <main #main id="main-content" class="shell__content" tabindex="-1">
+    <router-outlet />
+  </main>
+</div>

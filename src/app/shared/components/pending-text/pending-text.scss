@@ -1,0 +1,19 @@
+:host {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 6px;
+  max-width: 100%;
+  padding: 4px 9px;
+  border: 1px dashed var(--color-warning-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-warning-bg);
+  font-size: 12.5px;
+  line-height: 1.45;
+  font-style: italic;
+  color: var(--color-warning-text);
+}
+
+.pending__icon {
+  margin-top: 2px;
+  color: var(--color-warning-icon);
+}

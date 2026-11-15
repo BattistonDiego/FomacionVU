@@ -1,0 +1,64 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 450;
+  color: var(--color-text);
+  white-space: nowrap;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background: var(--color-surface-subtle);
+  }
+
+  // Modules not implemented yet: slightly muted, still navigable.
+  &--soon {
+    color: var(--color-text-secondary);
+  }
+
+  &--active,
+  &--active:hover {
+    background: var(--color-primary-soft);
+    color: var(--color-primary-dark);
+    font-weight: 500;
+  }
+}
+
+.nav-link__icon {
+  color: var(--color-icon);
+
+  .nav-link--active & {
+    color: var(--color-primary);
+  }
+}
+
+.nav-link__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Collapsed sidebar (desktop only): icon-only links, label kept for screen readers.
+@include above($bp-drawer) {
+  :host-context(.is-collapsed) {
+    .nav-link {
+      justify-content: center;
+      padding: 0;
+    }
+
+    .nav-link__label {
+      @include visually-hidden;
+    }
+  }
+}

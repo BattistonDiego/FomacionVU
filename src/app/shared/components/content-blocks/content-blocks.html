@@ -1,0 +1,16 @@
+@for (block of blocks(); track $index) {
+  @switch (block.type) {
+    @case ('text') {
+      <p class="block block--text">{{ block.text }}</p>
+    }
+    @case ('note') {
+      <p class="block block--note">
+        <svg lucideTriangleAlert class="block__note-icon" [size]="16"></svg>
+        <span>{{ block.text }}</span>
+      </p>
+    }
+    @case ('pending') {
+      <div class="block block--pending"><app-pending-text /></div>
+    }
+  }
+}

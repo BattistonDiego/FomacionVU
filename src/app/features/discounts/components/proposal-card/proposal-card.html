@@ -1,0 +1,27 @@
+<article class="proposal-card card">
+  <h3 class="proposal-card__title">{{ scenario().situation }}</h3>
+
+  <ol class="proposals">
+    @for (proposal of scenario().proposals; track proposal.label; let i = $index) {
+      <li class="proposal" [class.proposal--secondary]="i > 0">
+        <span class="proposal__label">{{ proposal.label }}</span>
+
+        @if (proposal.condition) {
+          <p class="proposal__condition">
+            <svg lucideInfo [size]="14"></svg>
+            <span>{{ proposal.condition }}</span>
+          </p>
+        }
+
+        <p class="proposal__text"><app-rich-text [text]="proposal.text" /></p>
+
+        @for (term of pendingTerms()[i]; track term) {
+          <p class="proposal__pending" role="note">
+            <svg lucideTriangleAlert [size]="13"></svg>
+            <span>Término «{{ term }}» pendiente de confirmación</span>
+          </p>
+        }
+      </li>
+    }
+  </ol>
+</article>

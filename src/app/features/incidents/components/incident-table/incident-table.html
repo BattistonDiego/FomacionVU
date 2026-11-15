@@ -1,0 +1,47 @@
+<div class="incident-table card">
+  <div class="incident-table__head" aria-hidden="true">
+    <span>Tipo de incidencia</span>
+    <span>¿Quién abre?</span>
+    <span>¿Quién la va a gestionar?</span>
+    <span></span>
+  </div>
+
+  <ul class="incident-table__list">
+    @for (incident of incidents(); track incident.id) {
+      <li>
+        <a class="row" [routerLink]="['/incidencias', incident.id]">
+          <div class="row__main">
+            <p class="row__title">
+              <span class="row__name">{{ incident.nameEs }}</span>
+              @if (incident.sourceWarning) {
+                <svg
+                  lucideTriangleAlert
+                  class="row__warning"
+                  [size]="15"
+                  [title]="incident.sourceWarning"
+                ></svg>
+              }
+              @if (incident.code) {
+                <span class="code-tag">{{ incident.code }}</span>
+              }
+              <span class="row__fr" lang="fr">{{ incident.nameFr }}</span>
+            </p>
+            <p class="row__preview">{{ preview(incident) }}</p>
+          </div>
+
+          <div class="row__cell">
+            <span class="row__label">¿Quién abre?</span>
+            <span class="badge">{{ incident.openedBy }}</span>
+          </div>
+
+          <div class="row__cell">
+            <span class="row__label">¿Quién la va a gestionar?</span>
+            <app-content-blocks [blocks]="incident.managedBy" variant="compact" />
+          </div>
+
+          <svg lucideChevronRight class="row__chevron" [size]="18"></svg>
+        </a>
+      </li>
+    }
+  </ul>
+</div>

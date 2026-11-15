@@ -1,0 +1,107 @@
+:host {
+  display: block;
+}
+
+// ── Quick access cards (prototype) ──
+.quick-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.quick-nav__card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  text-align: left;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+
+  &:hover {
+    border-color: var(--color-border-strong);
+    background: var(--color-surface-hover);
+
+    .quick-nav__chevron {
+      color: var(--color-text);
+      transform: translateX(2px);
+    }
+  }
+}
+
+.quick-nav__icon {
+  width: 34px;
+  height: 34px;
+}
+
+.quick-nav__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.quick-nav__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.quick-nav__summary {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.quick-nav__chevron {
+  color: var(--color-icon);
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+// ── Sections ──
+.section {
+  display: block;
+  margin-top: 44px;
+}
+
+.section__header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 18px;
+}
+
+.section__title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-text-strong);
+  // Keep the heading visible below the sticky header when scrolled to.
+  scroll-margin-top: calc(var(--header-height) + 20px);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.section__description {
+  font-size: 14.5px;
+  color: var(--color-text-secondary);
+}
+
+.scenarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+
+@media (max-width: 639.98px) {
+  .section {
+    margin-top: 36px;
+  }
+}

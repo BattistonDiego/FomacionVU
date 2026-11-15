@@ -1,0 +1,19 @@
+<div class="search">
+  <svg lucideSearch class="search__icon" [size]="18"></svg>
+  <input
+    #field
+    type="search"
+    class="search__field"
+    [value]="value()"
+    (input)="onInput($event)"
+    [placeholder]="placeholder()"
+    [attr.aria-label]="label()"
+    autocomplete="off"
+    spellcheck="false"
+  />
+  @if (value()) {
+    <button type="button" class="search__clear" (click)="clear()" [attr.aria-label]="clearLabel()">
+      <svg lucideX [size]="16"></svg>
+    </button>
+  }
+</div>

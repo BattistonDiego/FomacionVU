@@ -1,0 +1,49 @@
+@let newOrder = content.newOrder;
+@let validated = content.validatedOrder;
+
+<app-page-header
+  title="Descuentos"
+  subtitle="Consulta las condiciones y propuestas de descuento según la situación del pedido."
+  [breadcrumbs]="breadcrumbs"
+/>
+
+<nav class="quick-nav" aria-label="Secciones de la página">
+  <button type="button" class="quick-nav__card card" (click)="goToSection(newOrder.id)">
+    <span class="icon-tile quick-nav__icon"><svg lucideShoppingCart [size]="18"></svg></span>
+    <span class="quick-nav__text">
+      <span class="quick-nav__title">{{ newOrder.title }}</span>
+      <span class="quick-nav__summary">{{ newOrder.summary }}</span>
+    </span>
+    <svg lucideChevronRight class="quick-nav__chevron" [size]="18"></svg>
+  </button>
+  <button type="button" class="quick-nav__card card" (click)="goToSection(validated.id)">
+    <span class="icon-tile quick-nav__icon"><svg lucidePackage [size]="18"></svg></span>
+    <span class="quick-nav__text">
+      <span class="quick-nav__title">{{ validated.title }}</span>
+      <span class="quick-nav__summary">{{ validated.summary }}</span>
+    </span>
+    <svg lucideChevronRight class="quick-nav__chevron" [size]="18"></svg>
+  </button>
+</nav>
+
+<section class="section" [attr.aria-labelledby]="newOrder.id + '-title'">
+  <header class="section__header">
+    <h2 class="section__title" [id]="newOrder.id + '-title'" tabindex="-1">{{ newOrder.title }}</h2>
+    <p class="section__description">{{ newOrder.description }}</p>
+  </header>
+  <app-flash-sale-table [section]="newOrder" />
+</section>
+
+<section class="section" [attr.aria-labelledby]="validated.id + '-title'">
+  <header class="section__header">
+    <h2 class="section__title" [id]="validated.id + '-title'" tabindex="-1">{{ validated.title }}</h2>
+    <p class="section__description">{{ validated.description }}</p>
+  </header>
+  <div class="scenarios">
+    @for (scenario of validated.scenarios; track scenario.situation) {
+      <app-proposal-card [scenario]="scenario" />
+    }
+  </div>
+</section>
+
+<app-discount-conditions class="section" [conditions]="content.conditions" />

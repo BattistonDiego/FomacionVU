@@ -1,0 +1,130 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  container-type: inline-size;
+}
+
+.table-card {
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th,
+td {
+  padding: 18px 16px;
+  text-align: left;
+  vertical-align: middle;
+  border-top: 1px solid var(--color-border);
+
+  & + & {
+    border-left: 1px solid var(--color-border);
+  }
+}
+
+thead th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-top: 0;
+  background: var(--color-surface-subtle);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+thead th:first-child {
+  width: 26%;
+}
+
+.th {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.4;
+
+  svg {
+    margin-top: 1px;
+    color: var(--color-icon);
+  }
+}
+
+.time {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.result {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-text-strong);
+}
+
+.method {
+  margin-top: 4px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--color-text-secondary);
+}
+
+.cell-label {
+  @include visually-hidden;
+}
+
+// ── Narrow containers: one card per row ──
+@container (max-width: 759.98px) {
+  thead {
+    @include visually-hidden;
+  }
+
+  .table,
+  tbody,
+  tr,
+  th,
+  td {
+    display: block;
+    width: auto;
+  }
+
+  tr + tr {
+    border-top: 1px solid var(--color-border);
+  }
+
+  th,
+  td,
+  td + td {
+    border: 0;
+  }
+
+  .time {
+    padding: 16px 16px 4px;
+  }
+
+  td {
+    padding: 10px 16px;
+
+    &:last-child {
+      padding-bottom: 16px;
+    }
+  }
+
+  .cell-label {
+    position: static !important;
+    display: block;
+    width: auto;
+    height: auto;
+    margin: 0 0 4px;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+}

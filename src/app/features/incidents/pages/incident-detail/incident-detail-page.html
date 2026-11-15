@@ -1,0 +1,73 @@
+<app-breadcrumb [items]="breadcrumbs()" />
+
+@if (incident(); as item) {
+  <article class="detail" aria-labelledby="incident-title">
+    <header class="detail__header">
+      <span class="icon-tile detail__icon"><svg lucideCircleAlert [size]="24"></svg></span>
+
+      <div class="detail__heading">
+        <p class="detail__meta">
+          @if (item.code) {
+            <span class="code-tag">{{ item.code }}</span>
+          }
+          <span class="detail__fr" lang="fr">{{ item.nameFr }}</span>
+        </p>
+        <h1 id="incident-title" class="detail__title">{{ item.nameEs }}</h1>
+      </div>
+
+      <a
+        class="button button--secondary detail__back"
+        routerLink="/incidencias"
+        [queryParams]="listQueryParams()"
+      >
+        <svg lucideArrowLeft [size]="16"></svg>
+        Volver a tipos de incidencia
+      </a>
+    </header>
+
+    @if (item.sourceWarning) {
+      <p class="source-warning" role="note">
+        <span class="source-warning__icon" aria-hidden="true">⚠️</span>
+        <span>{{ item.sourceWarning }}</span>
+      </p>
+    }
+
+    <div class="detail__layout">
+      <section class="detail__main" aria-labelledby="concept-title">
+        <h2 id="concept-title" class="section-title">Concepto</h2>
+        <app-content-blocks [blocks]="item.concept" />
+      </section>
+
+      <aside class="detail__aside card" aria-label="Responsables">
+        <dl class="facts">
+          <div class="facts__row">
+            <dt class="facts__label">
+              <svg lucideDoorOpen [size]="15"></svg>
+              ¿Quién abre?
+            </dt>
+            <dd class="facts__value">{{ item.openedBy }}</dd>
+          </div>
+          <div class="facts__row">
+            <dt class="facts__label">
+              <svg lucideUsers [size]="15"></svg>
+              ¿Quién la va a gestionar?
+            </dt>
+            <dd class="facts__value">
+              <app-content-blocks [blocks]="item.managedBy" variant="compact" />
+            </dd>
+          </div>
+        </dl>
+      </aside>
+    </div>
+  </article>
+} @else {
+  <section class="not-found card" aria-labelledby="not-found-title">
+    <span class="icon-tile"><svg lucideFileExclamationPoint [size]="22"></svg></span>
+    <h1 id="not-found-title" class="not-found__title">Tipo de incidencia no encontrado</h1>
+    <p class="not-found__text">Es posible que el enlace no sea correcto.</p>
+    <a class="button button--secondary" routerLink="/incidencias">
+      <svg lucideArrowLeft [size]="16"></svg>
+      Volver a tipos de incidencia
+    </a>
+  </section>
+}

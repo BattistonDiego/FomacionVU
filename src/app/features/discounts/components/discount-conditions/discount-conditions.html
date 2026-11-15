@@ -1,0 +1,18 @@
+<section class="conditions card" [attr.aria-labelledby]="conditions().id + '-title'">
+  <div class="conditions__header">
+    <span class="icon-tile"><svg lucideMegaphone [size]="20"></svg></span>
+    <div>
+      <h2 [id]="conditions().id + '-title'" class="conditions__title">{{ conditions().title }}</h2>
+      <p class="conditions__lead">{{ conditions().lead }}</p>
+    </div>
+  </div>
+
+  <ul class="conditions__list">
+    @for (item of conditions().items; track item) {
+      <li class="conditions__item">
+        <span class="conditions__check"><svg lucideCheck [size]="14" [strokeWidth]="2.25"></svg></span>
+        <span>{{ item }}</span>
+      </li>
+    }
+  </ul>
+</section>

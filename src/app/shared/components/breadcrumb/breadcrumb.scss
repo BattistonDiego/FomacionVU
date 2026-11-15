@@ -1,0 +1,38 @@
+:host {
+  display: block;
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 0;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+
+  & + &::before {
+    content: '/';
+    margin: 0 8px;
+    color: var(--color-border-strong);
+  }
+}
+
+.breadcrumb__link {
+  border-radius: 4px;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-primary-dark);
+  }
+}
+
+.breadcrumb__current {
+  color: var(--color-text);
+  font-weight: 500;
+}

@@ -1,0 +1,54 @@
+<div class="sidebar">
+  <div class="sidebar__brand">
+    <app-brand [showName]="!layout.sidebarCollapsed() || layout.mobileNavOpen()" />
+
+    <button
+      type="button"
+      class="sidebar__collapse"
+      (click)="layout.toggleSidebar()"
+      [attr.aria-label]="layout.sidebarCollapsed() ? 'Expandir menú lateral' : 'Contraer menú lateral'"
+      [attr.aria-expanded]="!layout.sidebarCollapsed()"
+      aria-controls="app-sidebar"
+    >
+      <svg [lucideIcon]="layout.sidebarCollapsed() ? chevronRight : chevronLeft" [size]="14"></svg>
+    </button>
+
+    <button
+      type="button"
+      class="sidebar__close"
+      (click)="layout.closeMobileNav()"
+      aria-label="Cerrar menú"
+    >
+      <svg lucideX [size]="20"></svg>
+    </button>
+  </div>
+
+  <nav class="sidebar__nav" aria-label="Navegación principal">
+    @for (section of sections; track section.label) {
+      <div class="nav-section">
+        <p class="nav-section__label">{{ section.label }}</p>
+        <ul class="nav-section__list">
+          @for (item of section.items; track item.path) {
+            <li><app-sidebar-link [item]="item" [collapsed]="layout.sidebarCollapsed()" /></li>
+          }
+        </ul>
+      </div>
+    }
+  </nav>
+
+  <div class="sidebar__footer">
+    <ul class="nav-section__list">
+      @for (item of footerItems; track item.path) {
+        <li><app-sidebar-link [item]="item" [collapsed]="layout.sidebarCollapsed()" /></li>
+      }
+    </ul>
+
+    <div class="profile" [attr.title]="layout.sidebarCollapsed() ? user.name + ' · ' + user.role : null">
+      <app-avatar [name]="user.name" [size]="34" />
+      <div class="profile__text">
+        <span class="profile__name">{{ user.name }}</span>
+        <span class="profile__role">{{ user.role }}</span>
+      </div>
+    </div>
+  </div>
+</div>
