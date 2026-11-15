@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist/support-hub/browser"
+
+# SPA fallback: serve index.html for any route (e.g. /incidencias) so Angular Router handles it.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
