@@ -1,0 +1,21 @@
+<figure class="band">
+  <div class="band__table" aria-hidden="true">
+    <div class="band__row band__row--head">
+      <span>Producto</span>
+      <span>Proveedor</span>
+      <span>Estado</span>
+    </div>
+    @for (label of rows(); track $index) {
+      <div class="band__row" [style.background]="background()">
+        <span class="band__bar"></span>
+        <span class="band__bar band__bar--short"></span>
+        @if (label) {
+          <span class="band__label">{{ label }}</span>
+        } @else {
+          <span class="band__bar band__bar--short"></span>
+        }
+      </div>
+    }
+  </div>
+  <figcaption class="band__caption">Así se ve la faja en el listado de incidencias</figcaption>
+</figure>

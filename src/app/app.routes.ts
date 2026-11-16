@@ -19,6 +19,13 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/discounts/discounts.routes').then((m) => m.DISCOUNTS_ROUTES),
       },
+      {
+        path: 'colores-de-incidencias',
+        loadChildren: () =>
+          import('./features/incident-colors/incident-colors.routes').then(
+            (m) => m.INCIDENT_COLORS_ROUTES,
+          ),
+      },
       // Modules not implemented yet → "Módulo en preparación".
       ...comingSoonRoutes(),
       { path: '**', redirectTo: 'incidencias' },

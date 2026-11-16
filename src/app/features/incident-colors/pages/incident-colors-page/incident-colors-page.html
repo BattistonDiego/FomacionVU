@@ -1,0 +1,38 @@
+<app-page-header
+  title="Colores de incidencias"
+  subtitle="Consulta el significado de los colores de las incidencias y descubre qué departamento es responsable de cada gestión."
+  [breadcrumbs]="breadcrumbs"
+/>
+
+<nav class="index" aria-labelledby="color-index-title">
+  <h2 id="color-index-title" class="index__title">Buscar por color</h2>
+  <ul class="index__grid">
+    @for (category of categories; track category.id) {
+      <li>
+        <button type="button" class="chip card" (click)="goTo(category.id)" [attr.title]="category.title">
+          <span class="chip__swatch" [style.background]="background(category.swatch)" aria-hidden="true"></span>
+          <span class="chip__text">
+            <span class="chip__label">{{ category.shortLabel }}</span>
+            <span class="chip__code">{{ code(category.swatch) }}</span>
+          </span>
+        </button>
+      </li>
+    }
+  </ul>
+</nav>
+
+@for (group of groups; track $index) {
+  <section class="group" [attr.aria-label]="group.title ?? null">
+    @if (group.title) {
+      <header class="group__header">
+        <h2 class="group__title">{{ group.title }}</h2>
+        @if (group.note) {
+          <p class="group__note">{{ group.note }}</p>
+        }
+      </header>
+    }
+    @for (category of group.categories; track category.id) {
+      <app-color-category [category]="category" />
+    }
+  </section>
+}

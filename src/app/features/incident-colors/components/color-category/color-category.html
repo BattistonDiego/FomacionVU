@@ -1,0 +1,53 @@
+@let c = category();
+<article class="category card" [attr.aria-labelledby]="titleId()">
+  <header class="category__header">
+    <h3 class="category__title" [id]="titleId()" tabindex="-1">{{ c.title }}</h3>
+  </header>
+
+  <div class="category__body">
+    <div class="category__visual">
+      <div class="category__name">
+        <span class="swatch" [style.background]="background()" aria-hidden="true"></span>
+        <div>
+          <p class="category__short">{{ c.shortLabel }}</p>
+          <p class="category__code">{{ c.colorName }} · <span class="code-tag">{{ code() }}</span></p>
+        </div>
+      </div>
+      <app-band-example [category]="c" />
+    </div>
+
+    <div class="category__info">
+      @if (c.roles.length) {
+        <ul class="roles">
+          @for (role of c.roles; track role.label) {
+            <li class="role">
+              <div class="role__head">
+                <span class="role__label" [style.background]="background()">{{ role.label }}</span>
+                @if (role.assignment === 'afectamos') {
+                  <span class="assign assign--yes">
+                    <svg lucideArrowDownToLine [size]="13" [strokeWidth]="2.25"></svg>
+                    Afectamos aquí
+                  </span>
+                } @else if (role.assignment === 'no-afectamos') {
+                  <span class="assign assign--no">
+                    <svg lucideBan [size]="13"></svg>
+                    No afectamos aquí
+                  </span>
+                }
+              </div>
+              <p class="role__text">{{ role.description }}</p>
+              @if (role.exception) {
+                <p class="role__exception">
+                  <svg lucideTriangleAlert [size]="15"></svg>
+                  <span><strong>EXCEPCIÓN:</strong> {{ role.exception }}</span>
+                </p>
+              }
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="category__empty">Sin descripción en la documentación original.</p>
+      }
+    </div>
+  </div>
+</article>

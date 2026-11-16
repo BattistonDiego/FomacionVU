@@ -8,6 +8,7 @@ import {
   LucideLayoutGrid,
   LucideLibrary,
   LucideMapPin,
+  LucidePalette,
   LucideSettings,
   LucideStar,
   LucideTruck,
@@ -46,6 +47,12 @@ export const NAV_SECTIONS: readonly NavSection[] = [
       },
       { label: 'Códigos postales', path: 'codigos-postales', icon: LucideMapPin, available: false },
       { label: 'Descuentos', path: 'descuentos', icon: LucideCirclePercent, available: true },
+      {
+        label: 'Colores de incidencias',
+        path: 'colores-de-incidencias',
+        icon: LucidePalette,
+        available: true,
+      },
     ],
   },
   {

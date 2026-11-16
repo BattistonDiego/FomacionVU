@@ -1,0 +1,165 @@
+:host {
+  --category-color: var(--color-border);
+
+  display: block;
+}
+
+.category {
+  overflow: hidden;
+  container-type: inline-size;
+}
+
+.category__header {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.category__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+  scroll-margin-top: calc(var(--header-height) + 20px);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.category__body {
+  display: grid;
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+  gap: 28px;
+  padding: 20px;
+}
+
+// ── Left column: swatch + band example ──
+.category__visual {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.category__name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgb(0 0 0 / 6%);
+  flex-shrink: 0;
+}
+
+.category__short {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.category__code {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+// ── Right column: one block per status, with a bar in the category colour ──
+.roles {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.role {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 14px;
+  border-left: 3px solid var(--category-color);
+}
+
+.role__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.role__label {
+  display: inline-flex;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgb(0 0 0 / 6%);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.assign {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+
+  &--yes {
+    background: var(--color-text-strong);
+    color: #ffffff;
+  }
+
+  &--no {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+  }
+}
+
+.role__text {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.role__exception {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-warning-border);
+  border-radius: var(--radius-md);
+  background: var(--color-warning-bg);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--color-warning-text);
+
+  svg {
+    margin-top: 2px;
+    color: var(--color-warning-icon);
+  }
+}
+
+.category__empty {
+  padding: 12px 14px;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+// ── Narrow cards: stack the two columns ──
+@container (max-width: 699.98px) {
+  .category__body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    padding: 16px;
+  }
+
+  .category__header {
+    padding: 16px;
+  }
+}
