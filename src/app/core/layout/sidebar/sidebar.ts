@@ -4,13 +4,12 @@ import { LucideChevronLeft, LucideChevronRight, LucideDynamicIcon, LucideX } fro
 import { Brand } from '../brand/brand';
 import { LayoutService } from '../layout.service';
 import { SidebarLink } from './sidebar-link/sidebar-link';
-import { NAV_FOOTER_ITEMS, NAV_SECTIONS } from '../../navigation/navigation.config';
-import { CURRENT_USER } from '../../user/current-user';
-import { Avatar } from '../../../shared/components/avatar/avatar';
+import { UserMenu } from './user-menu/user-menu';
+import { NAV_SECTIONS } from '../../navigation/navigation.config';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [Brand, SidebarLink, Avatar, LucideDynamicIcon, LucideX],
+  imports: [Brand, SidebarLink, UserMenu, LucideDynamicIcon, LucideX],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,9 +21,11 @@ import { Avatar } from '../../../shared/components/avatar/avatar';
 })
 export class Sidebar {
   protected readonly layout = inject(LayoutService);
-  protected readonly sections = NAV_SECTIONS;
-  protected readonly footerItems = NAV_FOOTER_ITEMS;
-  protected readonly user = CURRENT_USER;
+  /** Only implemented modules are listed; planned ones keep their route but stay hidden. */
+  protected readonly sections = NAV_SECTIONS.map((section) => ({
+    ...section,
+    items: section.items.filter((item) => item.available),
+  })).filter((section) => section.items.length > 0);
   protected readonly chevronLeft = LucideChevronLeft;
   protected readonly chevronRight = LucideChevronRight;
 }

@@ -1,0 +1,246 @@
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+// ── Decorative background (reference): dot grid, two rings, two small diamonds ──
+.backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.backdrop__dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#e2e2e2 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 52% 58% at 50% 50%, #000 40%, transparent 100%);
+}
+
+.backdrop__ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid #ececec;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+
+  &--outer {
+    width: 880px;
+    height: 880px;
+  }
+
+  &--inner {
+    width: 660px;
+    height: 660px;
+  }
+}
+
+.backdrop__diamond {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: #fbd3d3;
+  transform: rotate(45deg);
+
+  &--top {
+    top: 16%;
+    left: calc(50% - 330px);
+  }
+
+  &--bottom {
+    top: 82%;
+    left: calc(50% + 320px);
+    width: 8px;
+    height: 8px;
+  }
+}
+
+// ── Card ──
+.identify {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px 24px;
+}
+
+.card {
+  width: min(440px, 100%);
+  padding: 44px 40px 44px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  box-shadow: 0 12px 40px rgb(0 0 0 / 6%);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.brand__name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.card__title {
+  margin-top: 36px;
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-text-strong);
+}
+
+.card__description {
+  margin-top: 12px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+// ── Form ──
+.form {
+  margin-top: 36px;
+}
+
+.form__label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-strong);
+}
+
+.form__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form__icon {
+  position: absolute;
+  left: 16px;
+  color: var(--color-icon);
+  pointer-events: none;
+}
+
+.form__input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px 0 44px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+  font-size: 15px;
+  color: var(--color-text-strong);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &::placeholder {
+    color: var(--color-text-secondary);
+  }
+
+  &:hover {
+    border-color: var(--color-border-strong);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--color-primary-border);
+    box-shadow: var(--focus-ring);
+  }
+}
+
+.form__submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 48px;
+  margin-top: 20px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--color-primary);
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  transition:
+    background-color 0.15s ease,
+    opacity 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: var(--color-primary-dark);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.card__hint {
+  margin-top: 30px;
+  padding: 0 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.footer {
+  position: relative;
+  padding: 0 16px 24px;
+  font-size: 12.5px;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+@media (max-width: 479.98px) {
+  .card {
+    padding: 32px 24px;
+  }
+
+  .card__title {
+    margin-top: 28px;
+    font-size: 23px;
+  }
+
+  .backdrop__ring--outer {
+    width: 640px;
+    height: 640px;
+  }
+
+  .backdrop__ring--inner {
+    width: 460px;
+    height: 460px;
+  }
+
+  .backdrop__diamond {
+    display: none;
+  }
+}

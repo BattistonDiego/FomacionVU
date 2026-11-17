@@ -15,6 +15,7 @@ import { LucideSearch, LucideX } from '@lucide/angular';
   templateUrl: './search-input.html',
   styleUrl: './search-input.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[class.search--lg]': 'size() === "lg"' },
 })
 export class SearchInput {
   readonly value = model('');
@@ -22,6 +23,8 @@ export class SearchInput {
   /** Accessible name of the field. */
   readonly label = input.required<string>();
   readonly clearLabel = input('Borrar búsqueda');
+  /** `lg` = taller field (home page). Default size is unchanged. */
+  readonly size = input<'md' | 'lg'>('md');
 
   private readonly field = viewChild.required<ElementRef<HTMLInputElement>>('field');
 

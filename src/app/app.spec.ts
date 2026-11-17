@@ -3,24 +3,48 @@ import { provideRouter, Router, withComponentInputBinding } from '@angular/route
 import { RouterTestingHarness } from '@angular/router/testing';
 
 import { routes } from './app.routes';
+import { USER_STORAGE_KEY } from './core/user/user-session.service';
 
 describe('App routing', () => {
   beforeEach(() => {
+    localStorage.setItem(USER_STORAGE_KEY, 'Ana');
     TestBed.configureTestingModule({
       providers: [provideRouter(routes, withComponentInputBinding())],
     });
   });
 
-  it('redirects the root URL to the incident list', async () => {
+  afterEach(() => localStorage.removeItem(USER_STORAGE_KEY));
+
+  it('opens on the welcome dashboard', async () => {
     const harness = await RouterTestingHarness.create('/');
-    expect(TestBed.inject(Router).url).toBe('/incidencias');
-    expect(harness.routeNativeElement?.textContent).toContain('Tipos de incidencia');
+    expect(TestBed.inject(Router).url).toBe('/');
+    expect(harness.routeNativeElement?.textContent).toContain('¡Bienvenido a SupportHub!');
   });
 
-  it('shows the placeholder page for modules not implemented yet', async () => {
-    const harness = await RouterTestingHarness.create('/glosario');
+  it('redirects the old "/inicio" address and unknown URLs to the dashboard', async () => {
+    await RouterTestingHarness.create('/inicio');
+    expect(TestBed.inject(Router).url).toBe('/');
+    await TestBed.inject(Router).navigateByUrl('/no-existe');
+    expect(TestBed.inject(Router).url).toBe('/');
+  });
+
+  it('keeps every operational module route working', async () => {
+    const harness = await RouterTestingHarness.create('/incidencias');
+    for (const [url, heading] of [
+      ['/incidencias', 'Tipos de incidencia'],
+      ['/descuentos', 'Descuentos'],
+      ['/pagos-adicionales', 'Pagos adicionales'],
+      ['/colores-de-incidencias', 'Colores de incidencias'],
+    ]) {
+      await harness.navigateByUrl(url);
+      expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toContain(heading);
+    }
+  });
+
+  it('keeps the placeholder page for planned modules', async () => {
+    const harness = await RouterTestingHarness.create('/escalados');
     const text = harness.routeNativeElement?.textContent ?? '';
-    expect(text).toContain('Glosario');
+    expect(text).toContain('Escalados');
     expect(text).toContain('Módulo en preparación');
   });
 });

@@ -2,14 +2,20 @@ import { LucideIcon } from '@lucide/angular';
 
 export interface NavItem {
   readonly label: string;
-  /** Top-level route path, without leading slash. */
+  /** Top-level route path, without leading slash (`''` = home). */
   readonly path: string;
   readonly icon: LucideIcon;
-  /** `false` → the route shows the "Módulo en preparación" page. */
+  /**
+   * `true` → implemented: shown in the sidebar and on the home page.
+   * `false` → planned: hidden from the menu; its route shows "Módulo en preparación".
+   */
   readonly available: boolean;
+  /** Short description for the home page card. */
+  readonly description?: string;
 }
 
 export interface NavSection {
-  readonly label: string;
+  /** Sections without label (e.g. "Inicio") render their items directly. */
+  readonly label?: string;
   readonly items: readonly NavItem[];
 }

@@ -1,0 +1,28 @@
+<div class="profile" [attr.title]="collapsed() ? name() + ' · ' + role : null">
+  <app-avatar [name]="name()" [size]="34" />
+  <div class="profile__text">
+    <span class="profile__name">{{ name() }}</span>
+    <span class="profile__role">{{ role }}</span>
+  </div>
+  <button
+    #trigger
+    type="button"
+    class="profile__more"
+    aria-haspopup="menu"
+    aria-controls="user-menu"
+    [attr.aria-expanded]="open()"
+    [attr.aria-label]="'Opciones de usuario de ' + name()"
+    (click)="toggle()"
+  >
+    <svg lucideEllipsisVertical [size]="16"></svg>
+  </button>
+</div>
+
+@if (open()) {
+  <div id="user-menu" class="menu" role="menu" [attr.aria-label]="'Opciones de ' + name()">
+    <button #firstItem type="button" class="menu__item" role="menuitem" (click)="changeUser()">
+      <svg lucideRefreshCw [size]="15"></svg>
+      Cambiar usuario
+    </button>
+  </div>
+}

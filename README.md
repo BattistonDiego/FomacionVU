@@ -2,13 +2,24 @@
 
 Base de conhecimento para o atendimento ao cliente. Interface em espanhol (es-ES).
 
-Módulos disponíveis:
+A aplicação abre na página inicial (`/`), com busca geral e um card por módulo.
+
+**Identificação (sem autenticação):** no primeiro acesso aparece `/identificacion`, que pede o
+nome e o guarda no localStorage (chave `supporthub_user`). Com um nome salvo, a app abre direto
+na página inicial. "Cambiar usuario" (menu ⋮ do perfil na sidebar) apaga o nome e volta à
+identificação. Todo o acesso ao localStorage está em `core/user/user-session.service.ts`; as
+rotas internas são protegidas por `core/user/user.guards.ts`.
+
+Módulos disponíveis (Operaciones):
 
 - **Incidencias** (`/incidencias`): listagem com busca e filtro, e página de detalhes.
-- **Descuentos** (`/descuentos`): regras de desconto por venda flash. Os dados estão em
-  `features/discounts/data/discounts.data.ts`; o termo "déo" está marcado como pendente de confirmação.
+- **Descuentos** (`/descuentos`): regras de desconto por venda flash. O termo "déo" está
+  marcado como pendente de confirmação.
+- **Pagos adicionales** (`/pagos-adicionales`): procedimento para solicitar pagamentos adicionais.
+- **Colores de incidencias** (`/colores-de-incidencias`): significado das cores das faixas.
 
-Os demais módulos aparecem na navegação como "Módulo en preparación".
+Módulos planejados (Escalados, Logística y entregas, Códigos postales) não aparecem no menu;
+as rotas mostram "Módulo en preparación".
 
 ## Executar
 
@@ -62,7 +73,10 @@ da fonte (linhas após o #18), ainda não verificada.
 
 1. Criar `features/<modulo>/` com o mesmo padrão (data, models, services, pages, routes).
 2. Registrar a rota em `app.routes.ts`.
-3. Marcar `available: true` no item correspondente em `core/navigation/navigation.config.ts`.
+3. Em `core/navigation/navigation.config.ts`, marcar `available: true` e preencher `description`
+   no item correspondente: ele passa a aparecer na sidebar e como card na página inicial.
+4. Para incluir o conteúdo na busca da página inicial, registrar os dados em
+   `features/home/services/home-search.service.ts` (`MODULE_CONTENT`).
 
 Novas informações de uma incidência (por exemplo, procedimentos) entram como campos
 opcionais em `IncidentType` e como uma seção nova na página de detalhes.

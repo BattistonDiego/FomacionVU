@@ -9,7 +9,6 @@ import { BreadcrumbItem } from '../../models/breadcrumb.model';
 export interface ComingSoonData {
   readonly heading: string;
   readonly section?: string;
-  readonly isHome?: boolean;
 }
 
 @Component({
@@ -22,15 +21,11 @@ export interface ComingSoonData {
 export class ComingSoonPage {
   readonly heading = input.required<string>();
   readonly section = input<string>();
-  readonly isHome = input(false);
 
   protected readonly breadcrumbs = computed<BreadcrumbItem[]>(() => {
-    if (this.isHome()) {
-      return [{ label: 'Inicio' }];
-    }
     const section = this.section();
     return [
-      { label: 'Inicio', link: '/inicio' },
+      { label: 'Inicio', link: '/' },
       ...(section ? [{ label: section }] : []),
       { label: this.heading() },
     ];

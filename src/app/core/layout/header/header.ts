@@ -3,7 +3,7 @@ import { LucideMenu } from '@lucide/angular';
 
 import { Brand } from '../brand/brand';
 import { LayoutService } from '../layout.service';
-import { CURRENT_USER } from '../../user/current-user';
+import { UserSessionService } from '../../user/user-session.service';
 import { Avatar } from '../../../shared/components/avatar/avatar';
 
 /** Top bar. On small screens it holds the menu button that opens the sidebar drawer. */
@@ -24,7 +24,9 @@ import { Avatar } from '../../../shared/components/avatar/avatar';
       </button>
       <app-brand class="header__brand" />
       <span class="header__spacer"></span>
-      <app-avatar [name]="user.name" [size]="34" />
+      @if (userName(); as name) {
+        <app-avatar [name]="name" [size]="34" [attr.title]="name" />
+      }
     </header>
   `,
   styleUrl: './header.scss',
@@ -32,5 +34,5 @@ import { Avatar } from '../../../shared/components/avatar/avatar';
 })
 export class Header {
   protected readonly layout = inject(LayoutService);
-  protected readonly user = CURRENT_USER;
+  protected readonly userName = inject(UserSessionService).name;
 }

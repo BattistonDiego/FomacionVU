@@ -1,10 +1,20 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  effect,
+  inject,
+  viewChild,
+} from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 
 import { Header } from '../header/header';
 import { LayoutService } from '../layout.service';
 import { Sidebar } from '../sidebar/sidebar';
+import { IDENTIFICATION_PATH } from '../../user/user.guards';
+import { UserSessionService } from '../../user/user-session.service';
 
 /** Application frame: sidebar + top bar + routed content. */
 @Component({
@@ -23,8 +33,19 @@ export class Shell {
   private readonly main = viewChild.required<ElementRef<HTMLElement>>('main');
 
   constructor() {
+    const router = inject(Router);
+    const session = inject(UserSessionService);
+
+    // The route guard protects navigation; this also covers the name being removed while
+    // the internal area is open (e.g. "Cambiar usuario" in another tab).
+    effect(() => {
+      if (!session.isIdentified()) {
+        void router.navigate(['/', IDENTIFICATION_PATH]);
+      }
+    });
+
     let previousPath = '';
-    const subscription = inject(Router)
+    const subscription = router
       .events.pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event) => {
         this.layout.closeMobileNav();

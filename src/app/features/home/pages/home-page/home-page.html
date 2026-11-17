@@ -1,0 +1,86 @@
+<header class="welcome">
+  <h1 class="welcome__title">¡Bienvenido a SupportHub!</h1>
+  <p class="welcome__subtitle">
+    Toda la información que necesitas para gestionar la atención al cliente, organizada en un solo lugar.
+  </p>
+</header>
+
+<div class="search">
+  <app-search-input
+    size="lg"
+    [(value)]="query"
+    placeholder="Buscar procedimientos, incidencias, descuentos..."
+    label="Buscar en SupportHub"
+    (keydown.enter)="openFirstResult()"
+  />
+
+  @if (results(); as r) {
+    <section class="results card" aria-label="Resultados de la búsqueda" aria-live="polite">
+      @if (!hasResults()) {
+        <p class="results__empty">No se han encontrado resultados para «{{ query().trim() }}».</p>
+      }
+
+      @if (r.modules.length) {
+        <h2 class="results__group">Módulos</h2>
+        <ul>
+          @for (module of r.modules; track module.path) {
+            <li>
+              <a class="result" [routerLink]="['/', module.path]">
+                <span class="icon-tile result__icon"><svg [lucideIcon]="module.icon" [size]="16"></svg></span>
+                <span class="result__text">
+                  <span class="result__title">{{ module.label }}</span>
+                  <span class="result__meta">{{ module.description }}</span>
+                </span>
+                <svg lucideChevronRight class="result__chevron" [size]="16"></svg>
+              </a>
+            </li>
+          }
+        </ul>
+      }
+
+      @if (r.incidents.length) {
+        <h2 class="results__group">Tipos de incidencia</h2>
+        <ul>
+          @for (incident of r.incidents; track incident.id) {
+            <li>
+              <a class="result" [routerLink]="['/incidencias', incident.id]">
+                <span class="result__text">
+                  <span class="result__title">
+                    {{ incident.nameEs }}
+                    @if (incident.code) {
+                      <span class="code-tag">{{ incident.code }}</span>
+                    }
+                  </span>
+                  <span class="result__meta" lang="fr">{{ incident.nameFr }}</span>
+                </span>
+                <svg lucideChevronRight class="result__chevron" [size]="16"></svg>
+              </a>
+            </li>
+          }
+        </ul>
+        <a class="results__all" routerLink="/incidencias" [queryParams]="{ q: query().trim() }">
+          Ver {{ r.incidentTotal === 1 ? 'el resultado' : 'los ' + r.incidentTotal + ' resultados' }} en Incidencias
+          <svg lucideArrowRight [size]="15"></svg>
+        </a>
+      }
+    </section>
+  }
+</div>
+
+<section class="modules" aria-labelledby="modules-title">
+  <h2 id="modules-title" class="modules__title">Explorar módulos</h2>
+  <p class="modules__subtitle">Accede rápidamente a las herramientas y procedimientos.</p>
+
+  <ul class="modules__grid">
+    @for (module of modules; track module.path) {
+      <li>
+        <a class="module card" [routerLink]="['/', module.path]">
+          <span class="icon-tile module__icon"><svg [lucideIcon]="module.icon" [size]="20"></svg></span>
+          <span class="module__name">{{ module.label }}</span>
+          <span class="module__description">{{ module.description }}</span>
+          <svg lucideArrowRight class="module__arrow" [size]="16"></svg>
+        </a>
+      </li>
+    }
+  </ul>
+</section>

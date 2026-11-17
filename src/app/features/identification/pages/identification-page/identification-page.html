@@ -1,0 +1,47 @@
+<div class="backdrop" aria-hidden="true">
+  <span class="backdrop__dots"></span>
+  <span class="backdrop__ring backdrop__ring--outer"></span>
+  <span class="backdrop__ring backdrop__ring--inner"></span>
+  <span class="backdrop__diamond backdrop__diamond--top"></span>
+  <span class="backdrop__diamond backdrop__diamond--bottom"></span>
+</div>
+
+<main class="identify">
+  <section class="card" aria-labelledby="identify-title">
+    <p class="brand">
+      <span class="brand__logo"><svg lucideMessageSquareText [size]="20" [strokeWidth]="2"></svg></span>
+      <span class="brand__name">SupportHub</span>
+    </p>
+
+    <h1 id="identify-title" class="card__title">¡Bienvenido a SupportHub!</h1>
+    <p class="card__description">Antes de empezar, queremos saber cómo te llamas.</p>
+
+    <form class="form" (submit)="enter($event)" novalidate>
+      <label class="form__label" for="user-name">¿Cómo te llamas?</label>
+      <div class="form__field">
+        <svg lucideUser class="form__icon" [size]="18"></svg>
+        <input
+          #field
+          id="user-name"
+          class="form__input"
+          type="text"
+          name="name"
+          autocomplete="name"
+          placeholder="Introduce tu nombre"
+          [attr.maxlength]="maxLength"
+          [value]="name()"
+          (input)="onInput($event)"
+        />
+      </div>
+
+      <button type="submit" class="form__submit" [disabled]="!canEnter()">
+        Entrar en SupportHub
+        <svg lucideArrowRight [size]="17"></svg>
+      </button>
+    </form>
+
+    <p class="card__hint">Tu espacio de trabajo, toda la información en un solo lugar.</p>
+  </section>
+</main>
+
+<footer class="footer">SupportHub · Manual de Atención</footer>

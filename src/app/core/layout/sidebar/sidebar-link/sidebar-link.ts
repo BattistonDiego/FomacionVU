@@ -14,6 +14,7 @@ import { NavItem } from '../../../navigation/navigation.model';
       [class.nav-link--soon]="!item().available"
       [routerLink]="'/' + item().path"
       routerLinkActive="nav-link--active"
+      [routerLinkActiveOptions]="{ exact: item().path === '' }"
       ariaCurrentWhenActive="page"
       [attr.title]="tooltip()"
       (click)="layout.closeMobileNav()"

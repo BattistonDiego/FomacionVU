@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
-/** Circle with the person's initials. Purely informative (not interactive). */
+/** Circle with the first letter of the person's name. Purely informative (not interactive). */
 @Component({
   selector: 'app-avatar',
   template: `{{ initials() }}`,
@@ -16,12 +16,5 @@ export class Avatar {
   readonly name = input.required<string>();
   readonly size = input(32);
 
-  protected readonly initials = computed(() =>
-    this.name()
-      .split(/\s+/)
-      .filter(Boolean)
-      .slice(0, 2)
-      .map((part) => part[0]?.toUpperCase() ?? '')
-      .join(''),
-  );
+  protected readonly initials = computed(() => this.name().trim().charAt(0).toLocaleUpperCase('es-ES'));
 }
