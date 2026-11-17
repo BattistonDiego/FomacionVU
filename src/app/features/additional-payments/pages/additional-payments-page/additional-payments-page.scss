@@ -1,0 +1,169 @@
+:host {
+  display: block;
+}
+
+// ── Quick access cards (prototype) ──
+.quick-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.quick-nav__card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  text-align: left;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+
+  &:hover {
+    border-color: var(--color-border-strong);
+
+    .quick-nav__chevron {
+      transform: translateX(2px);
+    }
+  }
+
+  // "¿El cliente ya tiene cita de entrega?": highlighted like the prototype.
+  &--alert {
+    border-color: var(--color-primary-border);
+    background: var(--color-primary-soft);
+
+    .quick-nav__icon {
+      background: var(--color-primary);
+      color: #ffffff;
+    }
+
+    .quick-nav__title {
+      color: var(--color-primary-dark);
+    }
+
+    &:hover {
+      border-color: var(--color-primary);
+    }
+  }
+}
+
+.quick-nav__icon {
+  width: 36px;
+  height: 36px;
+}
+
+.quick-nav__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.quick-nav__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.quick-nav__summary {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.quick-nav__chevron {
+  color: var(--color-icon);
+  transition: transform 0.15s ease;
+}
+
+.block {
+  display: block;
+  margin-top: 48px;
+}
+
+// ── ¡OJO! section ──
+.ojo {
+  margin-top: 56px;
+  overflow: hidden;
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.ojo__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+  border-bottom: 1px solid var(--color-primary-border);
+  background: var(--color-primary-soft);
+}
+
+.ojo__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.ojo__title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-primary-dark);
+  scroll-margin-top: calc(var(--header-height) + 20px);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.ojo__description {
+  margin-top: 6px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--color-text-strong);
+}
+
+.ojo__body {
+  padding: 24px;
+}
+
+.ojo__question {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.ojo__scenarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+
+@media (max-width: 639.98px) {
+  .ojo__header,
+  .ojo__body {
+    padding: 18px 16px;
+  }
+
+  .ojo__title {
+    font-size: 19px;
+  }
+
+  .ojo__scenarios {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

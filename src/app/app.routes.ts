@@ -20,6 +20,13 @@ export const routes: Routes = [
           import('./features/discounts/discounts.routes').then((m) => m.DISCOUNTS_ROUTES),
       },
       {
+        path: 'pagos-adicionales',
+        loadChildren: () =>
+          import('./features/additional-payments/additional-payments.routes').then(
+            (m) => m.ADDITIONAL_PAYMENTS_ROUTES,
+          ),
+      },
+      {
         path: 'colores-de-incidencias',
         loadChildren: () =>
           import('./features/incident-colors/incident-colors.routes').then(

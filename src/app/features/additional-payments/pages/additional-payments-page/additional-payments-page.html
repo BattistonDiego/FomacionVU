@@ -1,0 +1,54 @@
+@let procedure = content.procedure;
+@let appointment = content.appointment;
+
+<app-page-header
+  title="Pagos adicionales"
+  subtitle="Consulta el procedimiento para solicitar pagos adicionales y gestionar las solicitudes con Contabilidad y Logística."
+  [breadcrumbs]="breadcrumbs"
+/>
+
+<nav class="quick-nav" aria-label="Secciones de la página">
+  <button type="button" class="quick-nav__card card" (click)="goToSection(procedure.id)">
+    <span class="icon-tile quick-nav__icon"><svg lucideListOrdered [size]="18"></svg></span>
+    <span class="quick-nav__text">
+      <span class="quick-nav__title">{{ procedure.title }}</span>
+      <span class="quick-nav__summary">{{ procedure.summary }}</span>
+    </span>
+    <svg lucideChevronRight class="quick-nav__chevron" [size]="18"></svg>
+  </button>
+  <button
+    type="button"
+    class="quick-nav__card quick-nav__card--alert card"
+    (click)="goToSection(appointment.id)"
+  >
+    <span class="icon-tile quick-nav__icon"><svg lucideCalendarClock [size]="18"></svg></span>
+    <span class="quick-nav__text">
+      <span class="quick-nav__title">{{ appointment.navTitle }}</span>
+      <span class="quick-nav__summary">{{ appointment.summary }}</span>
+    </span>
+    <svg lucideChevronRight class="quick-nav__chevron" [size]="18"></svg>
+  </button>
+</nav>
+
+<app-payment-procedure class="block" [procedure]="procedure" />
+
+<app-after-flow class="block" [section]="content.after" />
+
+<section class="ojo" [attr.aria-labelledby]="appointment.id + '-title'">
+  <header class="ojo__header">
+    <span class="ojo__icon"><svg lucideTriangleAlert [size]="22"></svg></span>
+    <div>
+      <h2 class="ojo__title" [id]="appointment.id + '-title'" tabindex="-1">{{ appointment.title }}</h2>
+      <p class="ojo__description"><app-rich-text [text]="appointment.description" /></p>
+    </div>
+  </header>
+
+  <div class="ojo__body">
+    <p class="ojo__question"><svg lucideClock [size]="15"></svg>{{ appointment.question }}</p>
+    <div class="ojo__scenarios">
+      @for (scenario of appointment.scenarios; track scenario.label) {
+        <app-delivery-scenario [scenario]="scenario" />
+      }
+    </div>
+  </div>
+</section>

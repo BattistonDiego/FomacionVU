@@ -1,0 +1,140 @@
+:host {
+  display: block;
+  container-type: inline-size;
+}
+
+.after__title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-text-strong);
+}
+
+.flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.flow__marker {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  // Connector to the next step.
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    margin-left: 12px;
+    background: var(--color-border);
+  }
+}
+
+.flow__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  flex-shrink: 0;
+
+  .flow__step--first & {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: #ffffff;
+  }
+}
+
+.flow__step:last-child .flow__marker::after {
+  visibility: hidden;
+}
+
+.flow__actor {
+  margin-top: 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+
+  .flow__step--first & {
+    color: var(--color-primary-dark);
+  }
+}
+
+.flow__text {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-text-strong);
+}
+
+.important {
+  display: flex;
+  gap: 14px;
+  margin-top: 28px;
+  padding: 18px 20px;
+}
+
+.important__icon {
+  margin-top: 1px;
+  color: var(--color-text);
+}
+
+.important__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.important__text {
+  margin-top: 2px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+// Vertical timeline on narrow containers.
+@container (max-width: 759.98px) {
+  .flow {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .flow__step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    column-gap: 14px;
+    padding-bottom: 18px;
+
+    &:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      top: 32px;
+      bottom: 4px;
+      left: 14px;
+      width: 1px;
+      background: var(--color-border);
+    }
+  }
+
+  .flow__marker {
+    grid-row: 1 / span 2;
+    align-self: start;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .flow__actor {
+    margin-top: 4px;
+  }
+}

@@ -1,0 +1,53 @@
+@let s = scenario();
+<article class="scenario" [attr.aria-label]="s.label + ': ' + s.title">
+  <header class="scenario__header">
+    <span class="scenario__badge">{{ s.badge }}</span>
+    <span class="scenario__heading">
+      <span class="scenario__label">{{ s.label }}</span>
+      <span class="scenario__title">{{ s.title }}</span>
+    </span>
+  </header>
+
+  <div class="scenario__body">
+    @if (s.steps) {
+      <ol class="scenario__steps">
+        @for (step of s.steps; track $index) {
+          <li class="scenario__step">
+            <span class="scenario__step-number" aria-hidden="true">{{ $index + 1 }}</span>
+            <p><app-rich-text [text]="step" /></p>
+          </li>
+        }
+      </ol>
+    }
+    @if (s.text) {
+      <p class="scenario__text"><app-rich-text [text]="s.text" /></p>
+    }
+
+    <div class="scenario__footer">
+      <div class="order">
+        <p class="order__label" [id]="'scenario-order-' + s.tone">Orden</p>
+        <ol class="order__chain" [attr.aria-labelledby]="'scenario-order-' + s.tone">
+          @for (item of s.order; track item; let first = $first; let last = $last) {
+            <li class="order__item">
+              <span class="order__chip" [class.order__chip--first]="first">{{ item }}</span>
+              @if (!last) {
+                <svg lucideArrowRight class="order__arrow" [size]="15"></svg>
+              }
+            </li>
+          }
+        </ol>
+      </div>
+
+      <div class="alert" role="note">
+        <svg lucideMessageCircle class="alert__icon" [size]="18"></svg>
+        <div>
+          <p class="alert__title">{{ s.alert.title }}</p>
+          <p class="alert__text"><app-rich-text [text]="s.alert.text" /></p>
+          @if (s.alert.note) {
+            <p class="alert__note">{{ s.alert.note }}</p>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,86 @@
+@let p = procedure();
+<section class="procedure card" [attr.aria-labelledby]="p.id + '-title'">
+  <header class="procedure__header">
+    <h2 class="procedure__title" [id]="p.id + '-title'" tabindex="-1">{{ p.title }}</h2>
+    <p class="procedure__description">{{ p.description }}</p>
+  </header>
+
+  <ol class="steps">
+    <!-- Paso 1 -->
+    <li class="step">
+      <span class="step__number" aria-hidden="true">1</span>
+      <div class="step__content">
+        <p class="step__eyebrow">Paso 1</p>
+        <h3 class="step__title">{{ p.calculate.title }}</h3>
+        <p class="step__description"><app-rich-text [text]="p.calculate.description" /></p>
+
+        <ul class="cases">
+          @for (item of p.calculate.cases; track item.reason) {
+            <li class="case">
+              <span class="icon-tile case__icon"><app-reason-icon [reason]="item.reason" /></span>
+              <p class="case__title">
+                {{ item.title }}
+                @if (item.qualifier) {
+                  <span class="case__qualifier">{{ item.qualifier }}</span>
+                }
+              </p>
+              <p class="case__text">{{ item.description }}</p>
+            </li>
+          }
+        </ul>
+      </div>
+    </li>
+
+    <!-- Paso 2 -->
+    <li class="step">
+      <span class="step__number" aria-hidden="true">2</span>
+      <div class="step__content">
+        <p class="step__eyebrow">Paso 2</p>
+        <h3 class="step__title">{{ p.paymentLine.title }}</h3>
+        <p class="step__description"><app-rich-text [text]="p.paymentLine.description" /></p>
+
+        <div class="path">
+          <p class="path__label" id="payment-path-label">Ruta en el sistema</p>
+          <ol class="path__items" aria-labelledby="payment-path-label">
+            @for (item of p.paymentLine.path; track item.label; let last = $last) {
+              <li class="path__item">
+                <span class="path__chip" [class.path__chip--last]="last">
+                  @if (item.isAddAction) {
+                    <svg lucidePlus class="path__plus" [size]="15" [strokeWidth]="2.25"></svg>
+                  }
+                  {{ item.label }}
+                </span>
+                @if (!last) {
+                  <svg lucideChevronRight class="path__sep" [size]="16"></svg>
+                }
+              </li>
+            }
+          </ol>
+        </div>
+      </div>
+    </li>
+
+    <!-- Paso 3 -->
+    <li class="step">
+      <span class="step__number" aria-hidden="true">3</span>
+      <div class="step__content">
+        <p class="step__eyebrow">Paso 3</p>
+        <h3 class="step__title">{{ p.escalade.title }}</h3>
+        <p class="step__description"><app-rich-text [text]="p.escalade.description" /></p>
+
+        <div class="escalade">
+          <div class="escalade__box">
+            <p class="escalade__label">Afectar a</p>
+            <p class="escalade__value">{{ p.escalade.assignTo }}</p>
+          </div>
+          <div class="escalade__box escalade__box--subject">
+            <p class="escalade__label">Asunto</p>
+            <app-copy-snippet [value]="p.escalade.subject" />
+          </div>
+        </div>
+
+        <app-escalade-texts [title]="p.escalade.textsTitle" [texts]="p.escalade.texts" />
+      </div>
+    </li>
+  </ol>
+</section>

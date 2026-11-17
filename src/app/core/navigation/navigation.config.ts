@@ -4,6 +4,7 @@ import {
   LucideCircleAlert,
   LucideCirclePercent,
   LucideClock,
+  LucideCreditCard,
   LucideGraduationCap,
   LucideLayoutGrid,
   LucideLibrary,
@@ -47,6 +48,12 @@ export const NAV_SECTIONS: readonly NavSection[] = [
       },
       { label: 'Códigos postales', path: 'codigos-postales', icon: LucideMapPin, available: false },
       { label: 'Descuentos', path: 'descuentos', icon: LucideCirclePercent, available: true },
+      {
+        label: 'Pagos adicionales',
+        path: 'pagos-adicionales',
+        icon: LucideCreditCard,
+        available: true,
+      },
       {
         label: 'Colores de incidencias',
         path: 'colores-de-incidencias',

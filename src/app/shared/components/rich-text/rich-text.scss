@@ -12,6 +12,16 @@
   white-space: nowrap;
 }
 
+.rich-text__strong {
+  font-weight: 600;
+  color: inherit;
+}
+
+.rich-text__code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
 .rich-text__unconfirmed {
   padding: 0 1px;
   border: 1px dashed var(--color-warning-border);
