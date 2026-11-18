@@ -36,7 +36,7 @@ describe('IncidentDetailPage', () => {
   });
 
   it('flags cut-off fragments as pending confirmation', async () => {
-    const page = await open('pr2-rotura-de-stock');
+    const page = await open('pr2-no-localizado-en-el-transportista');
     const pending = page.querySelectorAll('app-pending-text');
     expect(pending.length).toBe(2);
     expect(pending[0].textContent).toContain(

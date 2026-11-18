@@ -35,7 +35,7 @@
 
     .quick-nav__icon {
       background: var(--color-primary);
-      color: #ffffff;
+      color: var(--color-on-primary);
     }
 
     .quick-nav__title {
@@ -109,7 +109,7 @@
   height: 44px;
   border-radius: var(--radius-md);
   background: var(--color-primary);
-  color: #ffffff;
+  color: var(--color-on-primary);
   flex-shrink: 0;
 }
 

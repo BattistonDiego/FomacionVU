@@ -74,3 +74,19 @@ svg {
 .visually-hidden {
   @include visually-hidden;
 }
+
+// Smooth colour change while the theme switches. ThemeService adds this class for a
+// moment only (never on first paint, never with reduced motion), so normal hovers keep
+// their own timing.
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    fill 0.2s ease,
+    stroke 0.2s ease,
+    box-shadow 0.2s ease !important;
+}

@@ -28,7 +28,7 @@ describe('INCIDENT_TYPES (transcription of the source documentation)', () => {
     }
   });
 
-  it('keeps the 8 cut-off fragments as pending (P1–P4), never guessed', () => {
+  it('keeps the 5 remaining cut-off fragments as pending (P3–P4), never guessed', () => {
     const pending = (id: string) => {
       const incident = INCIDENT_TYPES.find((item) => item.id === id);
       return [...(incident?.concept ?? []), ...(incident?.managedBy ?? [])].filter(
@@ -36,9 +36,12 @@ describe('INCIDENT_TYPES (transcription of the source documentation)', () => {
       ).length;
     };
     const total = INCIDENT_TYPES.reduce((sum, incident) => sum + pending(incident.id), 0);
-    expect(total).toBe(8);
-    expect(pending('servicio-no-cumplido')).toBe(1); // P1
-    expect(pending('pr2-rotura-de-stock')).toBe(2); // P2 + P4
+    expect(total).toBe(5);
+    expect(pending('servicio-no-cumplido')).toBe(0); // P1 confirmed by the content owner
+    expect(pending('pr2-rotura-de-stock')).toBe(0); // P2 confirmed, P4 line removed
+    expect(pending('pr2-danado-durante-la-preparacion-en-almacen')).toBe(1); // P4
+    expect(pending('pr2-no-conforme-en-la-descarga-del-contenedor')).toBe(1); // P4
+    expect(pending('pr2-faltante-en-la-descarga-del-contenedor')).toBe(1); // P4
     expect(pending('pr2-no-localizado-en-el-transportista')).toBe(2); // P3 + P4
   });
 

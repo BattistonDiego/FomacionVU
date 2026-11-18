@@ -1,6 +1,7 @@
 // Tone: dark by default (> 72 h), red when urgent (< 72 h).
 :host {
-  --tone: var(--color-text-strong);
+  --tone: var(--color-panel-strong);
+  --tone-on: var(--color-on-panel-strong);
   --tone-soft: var(--color-surface-subtle);
 
   display: block;
@@ -8,6 +9,7 @@
 
 :host(.is-urgent) {
   --tone: var(--color-primary);
+  --tone-on: var(--color-on-primary);
   --tone-soft: var(--color-primary-soft);
 }
 
@@ -31,12 +33,12 @@
   gap: 16px;
   padding: 16px 20px;
   background: var(--tone);
-  color: #ffffff;
+  color: var(--tone-on);
 }
 
 .scenario__badge {
   padding-right: 16px;
-  border-right: 1px solid rgb(255 255 255 / 30%);
+  border-right: 1px solid var(--color-on-panel-strong-divider);
   font-size: 26px;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -154,7 +156,7 @@
   &--first {
     border-color: var(--tone);
     background: var(--tone);
-    color: #ffffff;
+    color: var(--tone-on);
   }
 }
 
@@ -162,7 +164,7 @@
   color: var(--color-icon);
 
   :host(.is-urgent) & {
-    color: var(--color-primary);
+    color: var(--color-primary-accent);
   }
 }
 
@@ -172,12 +174,12 @@
   padding: 16px;
   border: 1px solid var(--color-primary-border);
   border-radius: var(--radius-md);
-  background: #fff5f5;
+  background: var(--color-primary-faint);
 }
 
 .alert__icon {
   margin-top: 1px;
-  color: var(--color-primary);
+  color: var(--color-primary-accent);
 }
 
 .alert__title {

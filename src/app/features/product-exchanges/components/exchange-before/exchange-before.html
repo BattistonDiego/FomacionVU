@@ -1,0 +1,32 @@
+@let s = section();
+
+<div class="before">
+  <article class="before__card card">
+    <h3 class="before__title">
+      <span class="icon-tile before__icon" aria-hidden="true"><svg lucideClipboardCheck [size]="17"></svg></span>
+      {{ s.confirm.title }}
+    </h3>
+    <p class="before__text"><app-rich-text [text]="s.confirm.text" /></p>
+    <ul class="chips" aria-label="Datos a confirmar con el cliente">
+      @for (item of s.confirm.items; track $index) {
+        <li class="chip">{{ item }}</li>
+      }
+    </ul>
+    <p class="before__footer">
+      <svg lucideNotebookPen class="before__footer-icon" [size]="16" aria-hidden="true"></svg>
+      <span><app-rich-text [text]="s.confirm.footer" /></span>
+    </p>
+  </article>
+
+  <article class="before__card before__card--outlined card">
+    <h3 class="before__title">
+      <span class="before__icon before__icon--plain" aria-hidden="true"><svg lucideRepeat2 [size]="18"></svg></span>
+      {{ s.avoid.title }}
+    </h3>
+    <p class="before__text"><app-rich-text [text]="s.avoid.text" /></p>
+    <p class="before__note">
+      <svg lucideTriangleAlert class="before__note-icon" [size]="16" aria-hidden="true"></svg>
+      <span><app-rich-text [text]="s.avoid.note" /></span>
+    </p>
+  </article>
+</div>

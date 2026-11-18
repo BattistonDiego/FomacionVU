@@ -1,4 +1,5 @@
 import {
+  LucideArrowLeftRight,
   LucideArrowUpRight,
   LucideCircleAlert,
   LucideCirclePercent,
@@ -46,6 +47,13 @@ export const OPERATIONS_ITEMS: readonly NavItem[] = [
     icon: LucidePalette,
     available: true,
     description: 'Identifica los colores y las responsabilidades de cada departamento.',
+  },
+  {
+    label: 'Cambios de producto',
+    path: 'cambios-de-producto',
+    icon: LucideArrowLeftRight,
+    available: true,
+    description: 'Consulta cuándo y cómo gestionar un cambio de producto.',
   },
   // Planned modules (not implemented yet): hidden from the menu, routes kept.
   { label: 'Escalados', path: 'escalados', icon: LucideArrowUpRight, available: false },

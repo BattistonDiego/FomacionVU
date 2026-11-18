@@ -1,8 +1,14 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import {
+  ApplicationConfig,
+  inject,
+  provideAppInitializer,
+  provideBrowserGlobalErrorListeners,
+} from '@angular/core';
 import { provideRouter, TitleStrategy, withComponentInputBinding } from '@angular/router';
 import { provideLucideConfig } from '@lucide/angular';
 
 import { routes } from './app.routes';
+import { ThemeService } from './core/theme/theme.service';
 import { AppTitleStrategy } from './core/title/app-title-strategy';
 
 export const appConfig: ApplicationConfig = {
@@ -13,5 +19,9 @@ export const appConfig: ApplicationConfig = {
     provideLucideConfig({ size: 18, strokeWidth: 1.75 }),
     // Same browser tab title ("SupportHub | Manual de Atención") on every route.
     { provide: TitleStrategy, useClass: AppTitleStrategy },
+    // Start the theme manager on every route, including the identification screen.
+    provideAppInitializer(() => {
+      inject(ThemeService);
+    }),
   ],
 };

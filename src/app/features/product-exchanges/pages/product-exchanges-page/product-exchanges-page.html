@@ -1,0 +1,108 @@
+@let restrictions = content.restrictions;
+@let before = content.before;
+@let management = content.management;
+@let otherCases = content.otherCases;
+@let whenToOffer = content.whenToOffer;
+
+<app-page-header
+  title="Cambios de producto"
+  subtitle="Consulta el procedimiento para gestionar cambios de productos según el estado del pedido y las condiciones aplicables."
+  [breadcrumbs]="breadcrumbs"
+/>
+
+<!-- Quick access -->
+<nav class="quick-nav" aria-label="Secciones de la página">
+  <button type="button" class="quick-nav__card quick-nav__card--alert card" (click)="goToSection(restrictions.id)">
+    <span class="icon-tile quick-nav__icon"><svg lucideBan [size]="18"></svg></span>
+    <span class="quick-nav__text">
+      <span class="quick-nav__title">Casos sin cambio</span>
+      <span class="quick-nav__summary">{{ restrictions.summary }}</span>
+    </span>
+    <svg lucideChevronRight class="quick-nav__chevron" [size]="18"></svg>
+  </button>
+  @for (flow of management.flows; track flow.id) {
+    <button type="button" class="quick-nav__card card" (click)="goToSection(flow.id)">
+      <span class="icon-tile quick-nav__icon">
+        @if (flow.tone === 'strong') {
+          <svg lucideTruck [size]="18"></svg>
+        } @else {
+          <svg lucidePackage [size]="18"></svg>
+        }
+      </span>
+      <span class="quick-nav__text">
+        <span class="quick-nav__title">{{ flow.title }}</span>
+        <span class="quick-nav__summary">Incidencia tipo «{{ flow.incidentType }}»</span>
+      </span>
+      <svg lucideChevronRight class="quick-nav__chevron" [size]="18"></svg>
+    </button>
+  }
+</nav>
+
+<!-- Casos en los que NO podemos hacer cambios -->
+<app-exchange-restrictions [section]="restrictions" />
+
+<!-- Cuestiones a tener en cuenta -->
+<section class="section" aria-labelledby="antes-title">
+  <h2 class="section__title" id="antes-title">{{ before.title }}</h2>
+  <app-exchange-before [section]="before" />
+</section>
+
+<!-- La gestión del cambio -->
+<section class="section" aria-labelledby="gestion-title">
+  <h2 class="section__title" id="gestion-title">{{ management.title }}</h2>
+  <p class="section__subtitle">{{ management.intro }}</p>
+  <div class="flows">
+    @for (flow of management.flows; track flow.id) {
+      <app-exchange-flow [flow]="flow" />
+    }
+  </div>
+</section>
+
+<!-- Otros casos -->
+<section class="other card" aria-labelledby="otros-title">
+  <header class="other__header">
+    <span class="other__icon" aria-hidden="true"><svg lucideInfo [size]="20"></svg></span>
+    <div>
+      <h2 class="other__title" id="otros-title">{{ otherCases.title }}</h2>
+      <p class="other__text"><app-rich-text [text]="otherCases.text" /></p>
+    </div>
+  </header>
+  <ul class="other__list">
+    @for (item of otherCases.items; track item.icon) {
+      <li class="other__item">
+        @if (item.icon === 'no-incident') {
+          <svg lucideFileX class="other__item-icon" [size]="17" aria-hidden="true"></svg>
+        } @else {
+          <svg lucideCircleSlash class="other__item-icon" [size]="17" aria-hidden="true"></svg>
+        }
+        <span>{{ item.text }}</span>
+      </li>
+    }
+  </ul>
+</section>
+
+<!-- ¿Cuándo ofrecemos cambio? -->
+<section class="section when" aria-labelledby="cuando-title">
+  <h2 class="section__title" id="cuando-title">{{ whenToOffer.title }}</h2>
+  <p class="when__goal">
+    <svg lucideTarget class="when__goal-icon" [size]="18" aria-hidden="true"></svg>
+    {{ whenToOffer.goal }}
+  </p>
+  <div class="when__cases">
+    @for (item of whenToOffer.cases; track item.icon) {
+      <article class="when__case">
+        <h3 class="when__title">
+          <span class="icon-tile when__icon" aria-hidden="true">
+            @if (item.icon === 'cancellation') {
+              <svg lucidePhoneOff [size]="17"></svg>
+            } @else {
+              <svg lucidePackageX [size]="17"></svg>
+            }
+          </span>
+          {{ item.title }}
+        </h3>
+        <p class="when__text"><app-rich-text [text]="item.text" /></p>
+      </article>
+    }
+  </div>
+</section>

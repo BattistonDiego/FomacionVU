@@ -35,6 +35,7 @@ describe('App routing', () => {
       ['/descuentos', 'Descuentos'],
       ['/pagos-adicionales', 'Pagos adicionales'],
       ['/colores-de-incidencias', 'Colores de incidencias'],
+      ['/cambios-de-producto', 'Cambios de producto'],
     ]) {
       await harness.navigateByUrl(url);
       expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toContain(heading);

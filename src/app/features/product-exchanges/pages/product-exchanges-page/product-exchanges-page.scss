@@ -1,0 +1,223 @@
+// Colours come only from the theme tokens (works in light and dark).
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+// ── Quick access cards (prototype) ──
+.quick-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.quick-nav__card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  text-align: left;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+
+  &:hover {
+    border-color: var(--color-border-strong);
+
+    .quick-nav__chevron {
+      transform: translateX(2px);
+    }
+  }
+
+  // "Casos sin cambio": red icon tile, like the prototype.
+  &--alert .quick-nav__icon {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+}
+
+.quick-nav__icon {
+  width: 36px;
+  height: 36px;
+}
+
+.quick-nav__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.quick-nav__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.quick-nav__summary {
+  overflow: hidden;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.quick-nav__chevron {
+  color: var(--color-icon);
+  transition: transform 0.15s ease;
+}
+
+// ── Generic section ──
+.section {
+  margin-top: 56px;
+}
+
+.section__title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-text-strong);
+}
+
+.section__subtitle {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+// ── La gestión del cambio ──
+.flows {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+  gap: 20px;
+  align-items: start;
+  margin-top: 20px;
+}
+
+// ── Otros casos ──
+.other {
+  margin-top: 56px;
+  padding: 24px;
+}
+
+.other__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.other__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--color-panel-strong);
+  color: var(--color-on-panel-strong);
+  flex-shrink: 0;
+}
+
+.other__title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-text-strong);
+}
+
+.other__text {
+  margin-top: 4px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--color-text);
+}
+
+.other__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 12px;
+  margin-top: 18px;
+  margin-left: 54px;
+}
+
+.other__item {
+  display: flex;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-subtle);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-strong);
+}
+
+.other__item-icon {
+  margin-top: 1px;
+  color: var(--color-icon);
+}
+
+// ── ¿Cuándo ofrecemos cambio? ──
+.when {
+  padding-top: 40px;
+  border-top: 1px solid var(--color-border);
+}
+
+.when__goal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--color-text-strong);
+}
+
+.when__goal-icon {
+  color: var(--color-primary-accent);
+}
+
+.when__cases {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.when__title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.when__icon {
+  width: 36px;
+  height: 36px;
+}
+
+.when__text {
+  margin-top: 12px;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--color-text);
+}
+
+// ── Small screens ──
+@include below($bp-mobile) {
+  .flows {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .other {
+    padding: 18px 16px;
+  }
+
+  .other__list {
+    margin-left: 0;
+  }
+}

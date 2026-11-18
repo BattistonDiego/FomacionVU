@@ -49,7 +49,7 @@
   .flow__step--first & {
     border-color: var(--color-primary);
     background: var(--color-primary);
-    color: #ffffff;
+    color: var(--color-on-primary);
   }
 }
 

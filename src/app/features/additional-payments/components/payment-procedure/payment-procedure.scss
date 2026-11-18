@@ -64,7 +64,7 @@
   height: 34px;
   border-radius: var(--radius-full);
   background: var(--color-primary);
-  color: #ffffff;
+  color: var(--color-on-primary);
   font-size: 14px;
   font-weight: 600;
 }
@@ -173,14 +173,14 @@
   color: var(--color-text-strong);
 
   &--last {
-    border-color: var(--color-text-strong);
-    background: var(--color-text-strong);
-    color: #ffffff;
+    border-color: var(--color-solid);
+    background: var(--color-solid);
+    color: var(--color-on-solid);
   }
 }
 
 .path__plus {
-  color: var(--color-primary);
+  color: var(--color-primary-accent);
 }
 
 .path__sep {

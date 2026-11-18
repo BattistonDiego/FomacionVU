@@ -15,7 +15,7 @@ import { note, PENDING, text } from '../../../shared/models/content-block.model'
  *   line stays a separate block.
  *
  * STATUS: INCOMPLETE. Page 2 of the source (rows after #18) has not been verified yet.
- * Pending fragments to confirm: P1 (#13), P2 (#14), P3 (#18), P4 (#14–#18).
+ * Pending fragments to confirm: P3 (#18), P4 (#15–#18).
  */
 export const INCIDENT_TYPES: readonly IncidentType[] = [
   // #1 — source: "Abimé (PR1) / Dañado"

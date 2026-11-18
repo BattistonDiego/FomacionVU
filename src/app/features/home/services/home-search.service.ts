@@ -7,6 +7,7 @@ import { DISCOUNTS } from '../../discounts/data/discounts.data';
 import { INCIDENT_COLOR_GROUPS } from '../../incident-colors/data/incident-colors.data';
 import { IncidentType } from '../../incidents/models/incident-type.model';
 import { IncidentTypesService } from '../../incidents/services/incident-types.service';
+import { PRODUCT_EXCHANGES } from '../../product-exchanges/data/product-exchanges.data';
 import { collectStrings } from '../../../shared/utils/collect-strings';
 import { matchesAllTermsByPrefix, tokenize } from '../../../shared/utils/search';
 
@@ -18,6 +19,7 @@ const MODULE_CONTENT: Readonly<Record<string, unknown>> = {
   descuentos: DISCOUNTS,
   'pagos-adicionales': ADDITIONAL_PAYMENTS,
   'colores-de-incidencias': INCIDENT_COLOR_GROUPS,
+  'cambios-de-producto': PRODUCT_EXCHANGES,
 };
 
 export interface HomeSearchResults {

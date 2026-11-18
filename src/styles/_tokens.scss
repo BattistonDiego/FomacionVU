@@ -1,34 +1,76 @@
 // Design tokens for SupportHub. Every component reads colours, radii and
 // spacing from these custom properties so the identity stays consistent.
+//
+// Themes: `:root` holds the light theme (default). The dark theme only redefines the
+// colour tokens under `:root[data-theme='dark']`; ThemeService (core/theme) sets that
+// attribute on <html>, and an inline script in index.html sets it before Angular starts
+// so a saved dark preference never flashes light. Components never branch on the theme:
+// they only read these tokens.
 
 :root {
+  color-scheme: light;
+
   // Brand
   --color-primary: #e31e24;
+  // Red used as TEXT (links, active items, highlighted words) on light/soft surfaces.
+  // Red used for ICONS and accents drawn on surfaces (not fills).
+  --color-primary-accent: #e31e24;
   --color-primary-dark: #b91c1c;
+  // Red used as a FILL on hover (e.g. primary button hover).
+  --color-primary-hover: #b91c1c;
   --color-primary-soft: #fee2e2;
   --color-primary-border: #fca5a5;
+  // Soft red background for alert boxes (slightly lighter than primary-soft).
+  --color-primary-faint: #fff5f5;
+  // Text/icons drawn on a primary-red fill.
+  --color-on-primary: #ffffff;
 
   // Surfaces
   --color-bg: #f8f8f8;
   --color-surface: #ffffff;
   --color-surface-subtle: #f8f8f8;
   --color-surface-hover: #fafafa;
+  --color-sidebar-bg: #ffffff;
+  --color-header-bg: #ffffff;
+  // Backdrop behind the mobile drawer.
+  --color-overlay: rgb(23 23 23 / 32%);
+
+  // Strong neutral fill for small marks (e.g. "sí" badges, the last chip of a path).
+  --color-solid: #171717;
+  --color-on-solid: #ffffff;
+  // Large dark panels (e.g. a scenario header) — stay dark-graphite in the dark theme.
+  --color-panel-strong: #171717;
+  --color-on-panel-strong: #ffffff;
+  --color-on-panel-strong-divider: rgb(255 255 255 / 30%);
+  --color-avatar-bg: #252525;
+  --color-avatar-text: #ffffff;
 
   // Text
   --color-text: #252525;
   --color-text-strong: #171717;
   --color-text-secondary: #737373;
+  --color-text-disabled: #a3a3a3;
   --color-icon: #8a8a8a;
 
   // Lines
   --color-border: #e5e5e5;
   --color-border-strong: #d4d4d4;
+  // Hairline around colour swatches that reproduce real system colours.
+  --color-swatch-outline: rgb(0 0 0 / 6%);
+  --color-swatch-divider: rgb(0 0 0 / 12%);
+  // Text drawn ON a real system colour (pastel bands): always dark, in both themes.
+  --color-on-swatch: #171717;
 
   // Caution ("OJO" notes and documentation flags)
   --color-warning-bg: #fffbeb;
   --color-warning-border: #fde68a;
   --color-warning-text: #854d0e;
   --color-warning-icon: #d97706;
+
+  // Identification screen backdrop
+  --color-decor-dot: #e2e2e2;
+  --color-decor-line: #ececec;
+  --color-decor-accent: #fbd3d3;
 
   // Shape
   --radius-sm: 6px;
@@ -38,6 +80,7 @@
 
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 4%);
   --shadow-md: 0 4px 16px rgb(0 0 0 / 6%);
+  --shadow-lg: 0 12px 40px rgb(0 0 0 / 6%);
   --shadow-drawer: 0 8px 32px rgb(0 0 0 / 16%);
 
   --focus-ring: 0 0 0 3px rgb(227 30 36 / 25%);
@@ -52,4 +95,70 @@
   --header-height: 58px;
   --content-max-width: 1072px;
   --page-gutter: 32px;
+}
+
+// ── Dark theme ──
+// Near-black canvas, an even darker sidebar, graphite cards, discreet borders and
+// light-grey text. The SupportHub red stays as the accent; red TEXT uses a lighter
+// tint because #E31E24 is too dark to read as small text on graphite.
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  // Brand
+  --color-primary: #e31e24;
+  --color-primary-accent: #ef4444;
+  --color-primary-dark: #f87171;
+  --color-primary-hover: #c81a1f;
+  --color-primary-soft: #451a1a;
+  --color-primary-border: #7f1d1d;
+  --color-primary-faint: #2a1515;
+  --color-on-primary: #ffffff;
+
+  // Surfaces
+  --color-bg: #121212;
+  --color-surface: #1c1c1c;
+  --color-surface-subtle: #242424;
+  --color-surface-hover: #222222;
+  --color-sidebar-bg: #090909;
+  --color-header-bg: #171313;
+  --color-overlay: rgb(0 0 0 / 60%);
+
+  --color-solid: #e5e5e5;
+  --color-on-solid: #121212;
+  --color-panel-strong: #2a2a2a;
+  --color-on-panel-strong: #f5f5f5;
+  --color-on-panel-strong-divider: rgb(255 255 255 / 18%);
+  --color-avatar-bg: #3a3a3a;
+  --color-avatar-text: #f5f5f5;
+
+  // Text
+  --color-text: #e5e5e5;
+  --color-text-strong: #f5f5f5;
+  --color-text-secondary: #a3a3a3;
+  --color-text-disabled: #737373;
+  --color-icon: #8f8f8f;
+
+  // Lines
+  --color-border: #333333;
+  --color-border-strong: #474747;
+  --color-swatch-outline: rgb(255 255 255 / 14%);
+  --color-swatch-divider: rgb(0 0 0 / 22%);
+
+  // Caution
+  --color-warning-bg: #2a2110;
+  --color-warning-border: #5c4813;
+  --color-warning-text: #fcd34d;
+  --color-warning-icon: #f59e0b;
+
+  // Identification screen backdrop
+  --color-decor-dot: #2a2a2a;
+  --color-decor-line: #242424;
+  --color-decor-accent: #5c1f1f;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%);
+  --shadow-md: 0 4px 16px rgb(0 0 0 / 45%);
+  --shadow-lg: 0 12px 40px rgb(0 0 0 / 50%);
+  --shadow-drawer: 0 8px 32px rgb(0 0 0 / 60%);
+
+  --focus-ring: 0 0 0 3px rgb(248 113 113 / 45%);
 }

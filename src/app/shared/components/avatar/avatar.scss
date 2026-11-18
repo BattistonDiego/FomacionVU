@@ -7,8 +7,8 @@
   width: var(--avatar-size);
   height: var(--avatar-size);
   border-radius: var(--radius-full);
-  background: var(--color-text);
-  color: #ffffff;
+  background: var(--color-avatar-bg);
+  color: var(--color-avatar-text);
   font-size: calc(var(--avatar-size) * 0.4);
   font-weight: 600;
   letter-spacing: 0.02em;

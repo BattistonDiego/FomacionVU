@@ -39,12 +39,14 @@ describe('HomePage', () => {
       'Descuentos',
       'Pagos adicionales',
       'Colores de incidencias',
+      'Cambios de producto',
     ]);
     expect([...page().querySelectorAll('a.module')].map((a) => a.getAttribute('href'))).toEqual([
       '/incidencias',
       '/descuentos',
       '/pagos-adicionales',
       '/colores-de-incidencias',
+      '/cambios-de-producto',
     ]);
   });
 

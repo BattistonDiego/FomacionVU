@@ -1,0 +1,179 @@
+// Colours come only from the theme tokens (works in light and dark).
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+// ── Casos en los que NO podemos hacer cambios ──
+.restrictions {
+  margin-top: 48px;
+  overflow: hidden;
+  border: 1px solid var(--color-primary-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.restrictions__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--color-primary-border);
+  background: var(--color-primary-soft);
+}
+
+.restrictions__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  flex-shrink: 0;
+}
+
+.restrictions__title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-primary-dark);
+  scroll-margin-top: calc(var(--header-height) + 20px);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.restrictions__subtitle {
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--color-primary-dark);
+}
+
+// 1px gaps over the border colour draw the dividers between cells.
+.restrictions__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--color-border);
+}
+
+.restriction {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 24px;
+  background: var(--color-surface);
+
+  &--wide {
+    grid-column: 1 / -1;
+  }
+}
+
+.restriction__icon {
+  width: 32px;
+  height: 32px;
+}
+
+.restriction__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
+.restriction__text {
+  margin-top: 4px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--color-text-strong);
+}
+
+// Alma
+.restriction--financing {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.financing__title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.financing__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-subtle);
+  color: var(--color-text-secondary);
+}
+
+.financing__options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.option {
+  display: flex;
+  gap: 10px;
+  padding: 16px 18px;
+  border: 1px solid var(--color-text-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+
+  &--denied {
+    border-color: var(--color-primary-border);
+    background: var(--color-primary-soft);
+  }
+}
+
+.option__icon {
+  margin-top: 1px;
+  color: var(--color-primary-accent);
+}
+
+.option__title {
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--color-text-strong);
+}
+
+.option__marker {
+  color: var(--color-text-secondary);
+
+  .option--denied & {
+    color: var(--color-primary-dark);
+  }
+}
+
+.option__text {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-text);
+}
+
+@include below($bp-mobile) {
+  .restrictions__header,
+  .restriction {
+    padding: 16px;
+  }
+
+  .restrictions__grid,
+  .financing__options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

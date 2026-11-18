@@ -18,7 +18,7 @@
 .backdrop__dots {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(#e2e2e2 1px, transparent 1.2px);
+  background-image: radial-gradient(var(--color-decor-dot) 1px, transparent 1.2px);
   background-size: 22px 22px;
   mask-image: radial-gradient(ellipse 52% 58% at 50% 50%, #000 40%, transparent 100%);
 }
@@ -27,7 +27,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  border: 1px solid #ececec;
+  border: 1px solid var(--color-decor-line);
   border-radius: 50%;
   transform: translate(-50%, -50%);
 
@@ -47,7 +47,7 @@
   width: 10px;
   height: 10px;
   border-radius: 2px;
-  background: #fbd3d3;
+  background: var(--color-decor-accent);
   transform: rotate(45deg);
 
   &--top {
@@ -61,6 +61,13 @@
     width: 8px;
     height: 8px;
   }
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1;
 }
 
 // ── Card ──
@@ -79,7 +86,7 @@
   border: 1px solid var(--color-border);
   border-radius: 16px;
   background: var(--color-surface);
-  box-shadow: 0 12px 40px rgb(0 0 0 / 6%);
+  box-shadow: var(--shadow-lg);
 }
 
 .brand {
@@ -96,7 +103,7 @@
   height: 36px;
   border-radius: var(--radius-md);
   background: var(--color-primary);
-  color: #ffffff;
+  color: var(--color-on-primary);
 }
 
 .brand__name {
@@ -188,13 +195,13 @@
   background: var(--color-primary);
   font-size: 15px;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--color-on-primary);
   transition:
     background-color 0.15s ease,
     opacity 0.15s ease;
 
   &:hover:not(:disabled) {
-    background: var(--color-primary-dark);
+    background: var(--color-primary-hover);
   }
 
   &:disabled {

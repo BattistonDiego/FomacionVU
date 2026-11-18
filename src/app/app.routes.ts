@@ -54,6 +54,13 @@ export const routes: Routes = [
             (m) => m.INCIDENT_COLORS_ROUTES,
           ),
       },
+      {
+        path: 'cambios-de-producto',
+        loadChildren: () =>
+          import('./features/product-exchanges/product-exchanges.routes').then(
+            (m) => m.PRODUCT_EXCHANGES_ROUTES,
+          ),
+      },
       // Planned modules (hidden from the menu) → "Módulo en preparación".
       ...comingSoonRoutes(),
       { path: '**', redirectTo: '' },

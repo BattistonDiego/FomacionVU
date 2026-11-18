@@ -1,0 +1,104 @@
+// Colours come only from the theme tokens (works in light and dark).
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+// ── Cuestiones a tener en cuenta ──
+.before {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.before__card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+
+  &--outlined {
+    border-color: var(--color-text-strong);
+  }
+}
+
+.before__title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.before__icon {
+  width: 36px;
+  height: 36px;
+
+  &--plain {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-warning-icon);
+  }
+}
+
+.before__text {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.before__footer,
+.before__note {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-text-strong);
+}
+
+.before__footer {
+  margin-top: auto;
+  font-weight: 500;
+}
+
+.before__footer-icon {
+  margin-top: 2px;
+  color: var(--color-primary-accent);
+}
+
+.before__note {
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-subtle);
+}
+
+.before__note-icon {
+  margin-top: 2px;
+  color: var(--color-warning-icon);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 5px 11px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-subtle);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--color-text-strong);
+}
+
+@include below($bp-mobile) {
+  .before__card {
+    padding: 18px 16px;
+  }
+}

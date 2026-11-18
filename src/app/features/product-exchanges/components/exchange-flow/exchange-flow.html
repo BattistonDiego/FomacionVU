@@ -1,0 +1,90 @@
+@let f = flow();
+
+<section class="flow card" [attr.aria-labelledby]="f.id + '-title'">
+  <header class="flow__header">
+    <span class="flow__icon">
+      @if (f.tone === 'strong') {
+        <svg lucideTruck [size]="20"></svg>
+      } @else {
+        <svg lucidePackage [size]="20"></svg>
+      }
+    </span>
+    <div>
+      <h3 class="flow__title" [id]="f.id + '-title'" tabindex="-1">{{ f.title }}</h3>
+      <p class="flow__subtitle">Incidencia tipo <strong>«{{ f.incidentType }}»</strong></p>
+    </div>
+  </header>
+
+  <ol class="steps">
+    @for (step of f.steps; track $index) {
+      <li class="step">
+        <span class="step__number" aria-hidden="true">{{ $index + 1 }}</span>
+        <div class="step__body">
+          <h4 class="step__title">
+            <span class="step__icon" aria-hidden="true">
+              @switch (step.icon) {
+                @case ('open-incident') { <svg lucideFilePlus [size]="16"></svg> }
+                @case ('add-product') { <svg lucidePackagePlus [size]="16"></svg> }
+                @case ('discounts') { <svg lucideTicketPercent [size]="16"></svg> }
+                @case ('return-costs') { <svg lucideUndo2 [size]="16"></svg> }
+                @case ('balearics') { <svg lucideShip [size]="16"></svg> }
+                @case ('inform') { <svg lucideMail [size]="16"></svg> }
+              }
+            </span>
+            <span class="visually-hidden">Paso {{ $index + 1 }}: </span>{{ step.title }}
+            @if (step.badge) {
+              <span class="step__badge">{{ step.badge }}</span>
+            }
+          </h4>
+
+          @for (block of step.blocks; track $index) {
+            @switch (block.kind) {
+              @case ('text') {
+                <p class="step__text"><app-rich-text [text]="block.text" /></p>
+              }
+              @case ('chips') {
+                <ul class="chips" aria-label="Datos a confirmar">
+                  @for (item of block.items; track $index) {
+                    <li class="chip">{{ item }}</li>
+                  }
+                </ul>
+              }
+              @case ('substeps') {
+                <div class="substeps">
+                  <p class="substeps__intro"><app-rich-text [text]="block.intro" /></p>
+                  <ol class="substeps__list">
+                    @for (item of block.items; track $index) {
+                      <li class="substeps__item">
+                        <span class="substeps__number" aria-hidden="true">{{ $index + 1 }}.</span>
+                        <span><app-rich-text [text]="item" /></span>
+                      </li>
+                    }
+                  </ol>
+                </div>
+              }
+              @case ('alert') {
+                <p class="alert">
+                  <svg lucideCircleAlert class="alert__icon" [size]="16"></svg>
+                  <span><app-rich-text [text]="block.text" /></span>
+                </p>
+              }
+              @case ('outcome') {
+                <div class="outcome" [class.outcome--refund]="block.direction === 'refund'">
+                  <p class="outcome__title">
+                    @if (block.direction === 'pay') {
+                      <svg lucideArrowUpRight class="outcome__icon" [size]="15"></svg>
+                    } @else {
+                      <svg lucideArrowDownRight class="outcome__icon" [size]="15"></svg>
+                    }
+                    {{ block.title }}
+                  </p>
+                  <p class="outcome__text"><app-rich-text [text]="block.text" /></p>
+                </div>
+              }
+            }
+          }
+        </div>
+      </li>
+    }
+  </ol>
+</section>

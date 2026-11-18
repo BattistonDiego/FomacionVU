@@ -1,0 +1,75 @@
+:host {
+  position: relative;
+  display: inline-flex;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text-secondary);
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background: var(--color-surface-subtle);
+    border-color: var(--color-border);
+    color: var(--color-text-strong);
+  }
+
+  &:active {
+    background: var(--color-border);
+  }
+}
+
+// Visible on hover and on keyboard focus (a native `title` would not show on focus).
+.tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 70;
+  padding: 6px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--color-text-strong);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-2px);
+  transition:
+    opacity 0.12s ease,
+    transform 0.12s ease,
+    visibility 0s linear 0.12s;
+  pointer-events: none;
+}
+
+.toggle:hover + .tooltip,
+.toggle:focus-visible + .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0.25s, 0.25s, 0s;
+}
+
+.toggle:focus-visible + .tooltip {
+  transition-delay: 0s;
+}
+
+@media (hover: none) {
+  .toggle:hover + .tooltip {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
