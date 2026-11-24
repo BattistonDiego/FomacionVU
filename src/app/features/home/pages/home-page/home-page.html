@@ -1,3 +1,5 @@
+<app-news-banner />
+
 <header class="welcome">
   <h1 class="welcome__title">¡Bienvenido a SupportHub!</h1>
   <p class="welcome__subtitle">
@@ -9,7 +11,7 @@
   <app-search-input
     size="lg"
     [(value)]="query"
-    placeholder="Buscar procedimientos, incidencias, descuentos..."
+    placeholder="Buscar procedimientos, incidencias, novedades..."
     label="Buscar en SupportHub"
     (keydown.enter)="openFirstResult()"
   />
@@ -30,6 +32,24 @@
                 <span class="result__text">
                   <span class="result__title">{{ module.label }}</span>
                   <span class="result__meta">{{ module.description }}</span>
+                </span>
+                <svg lucideChevronRight class="result__chevron" [size]="16"></svg>
+              </a>
+            </li>
+          }
+        </ul>
+      }
+
+      @if (r.news.length) {
+        <h2 class="results__group">Novedades</h2>
+        <ul>
+          @for (item of r.news; track item.id) {
+            <li>
+              <a class="result" [routerLink]="['/novedades', item.slug]">
+                <span class="icon-tile result__icon"><svg lucideMegaphone [size]="16"></svg></span>
+                <span class="result__text">
+                  <span class="result__title">{{ item.title }}</span>
+                  <span class="result__meta">{{ item.tags.join(' · ') }}</span>
                 </span>
                 <svg lucideChevronRight class="result__chevron" [size]="16"></svg>
               </a>

@@ -49,6 +49,41 @@
   text-overflow: ellipsis;
 }
 
+// ── Counter (e.g. unread announcements) ──
+.nav-link__icon-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.nav-link__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  margin-left: auto;
+  padding: 0 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+// Dot on the icon: only visible when the sidebar is collapsed (see below).
+.nav-link__dot {
+  display: none;
+  position: absolute;
+  top: -3px;
+  right: -4px;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--color-sidebar-bg);
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+}
+
 // Collapsed sidebar (desktop only): icon-only links, label kept for screen readers.
 @include above($bp-drawer) {
   :host-context(.is-collapsed) {
@@ -59,6 +94,14 @@
 
     .nav-link__label {
       @include visually-hidden;
+    }
+
+    .nav-link__badge {
+      display: none;
+    }
+
+    .nav-link__dot {
+      display: block;
     }
   }
 }

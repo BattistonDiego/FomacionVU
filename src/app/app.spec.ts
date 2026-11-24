@@ -4,6 +4,7 @@ import { RouterTestingHarness } from '@angular/router/testing';
 
 import { routes } from './app.routes';
 import { USER_STORAGE_KEY } from './core/user/user-session.service';
+import { NewsService } from './features/news/services/news.service';
 
 describe('App routing', () => {
   beforeEach(() => {
@@ -30,12 +31,15 @@ describe('App routing', () => {
 
   it('keeps every operational module route working', async () => {
     const harness = await RouterTestingHarness.create('/incidencias');
+    await TestBed.inject(NewsService).ready; // announcements are loaded on demand
     for (const [url, heading] of [
       ['/incidencias', 'Tipos de incidencia'],
       ['/descuentos', 'Descuentos'],
       ['/pagos-adicionales', 'Pagos adicionales'],
       ['/colores-de-incidencias', 'Colores de incidencias'],
       ['/cambios-de-producto', 'Cambios de producto'],
+      ['/novedades', 'Novedades'],
+      ['/novedades/boton-de-recogida-en-las-incidencias', 'Botón de “Recogida” en las incidencias'],
     ]) {
       await harness.navigateByUrl(url);
       expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toContain(heading);

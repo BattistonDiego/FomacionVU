@@ -39,8 +39,12 @@
             "production": {
               "budgets": [
                 {
+                  // Raised from 500kB on 2026-11-24 (Novedades): @lucide/angular ships as a single
+                  // module, so every icon used anywhere (even in lazy pages) lands in the initial
+                  // bundle (~506 kB raw, ~85 kB gzip). Feature code and data are lazy-loaded.
+                  // Pending task: load icons per component/route, then bring this back to 500kB.
                   "type": "initial",
-                  "maximumWarning": "500kB",
+                  "maximumWarning": "550kB",
                   "maximumError": "1MB"
                 },
                 {

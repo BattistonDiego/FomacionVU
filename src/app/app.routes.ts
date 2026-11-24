@@ -30,6 +30,12 @@ export const routes: Routes = [
       },
       // Old address of "Inicio" (still used by module breadcrumbs).
       { path: 'inicio', redirectTo: '' },
+      // Comunicación
+      {
+        path: 'novedades',
+        loadChildren: () => import('./features/news/news.routes').then((m) => m.NEWS_ROUTES),
+      },
+      // Operaciones
       {
         path: 'incidencias',
         loadChildren: () =>

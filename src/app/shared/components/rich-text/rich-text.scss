@@ -30,3 +30,8 @@
   color: var(--color-warning-text);
   cursor: help;
 }
+
+.rich-text__emphasis {
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}

@@ -1,0 +1,40 @@
+@let s = section();
+
+<section class="rule" aria-labelledby="news-rule-title">
+  <h2 class="rule__title" id="news-rule-title">
+    <span class="rule__icon" aria-hidden="true"><svg lucidePin [size]="18"></svg></span>
+    {{ s.title }}
+  </h2>
+  <p class="rule__text"><app-rich-text [text]="s.text" /></p>
+
+  <ol class="steps">
+    @for (step of s.steps; track $index) {
+      <li class="step" [class.step--mandatory]="step.mandatory">
+        <p class="step__label">
+          Paso {{ $index + 1 }}
+          @if (step.mandatory) {
+            · Obligatorio
+          }
+        </p>
+        <h3 class="step__title">{{ step.title }}</h3>
+        @if (step.text) {
+          <p class="step__text">{{ step.text }}</p>
+        }
+        @if (step.options?.length) {
+          <ul class="options">
+            @for (option of step.options; track option.label) {
+              <li class="option">
+                @if (option.icon === 'pickup-only') {
+                  <svg lucidePackage [size]="15" aria-hidden="true"></svg>
+                } @else {
+                  <svg lucideArrowLeftRight [size]="15" aria-hidden="true"></svg>
+                }
+                {{ option.label }}
+              </li>
+            }
+          </ul>
+        }
+      </li>
+    }
+  </ol>
+</section>

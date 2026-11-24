@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, computed, inject } from '@angular/core';
 
 import { AVAILABLE_MODULES } from '../../../core/navigation/navigation.config';
 import { NavItem } from '../../../core/navigation/navigation.model';
@@ -7,6 +7,8 @@ import { DISCOUNTS } from '../../discounts/data/discounts.data';
 import { INCIDENT_COLOR_GROUPS } from '../../incident-colors/data/incident-colors.data';
 import { IncidentType } from '../../incidents/models/incident-type.model';
 import { IncidentTypesService } from '../../incidents/services/incident-types.service';
+import { News } from '../../news/models/news.model';
+import { NewsService } from '../../news/services/news.service';
 import { PRODUCT_EXCHANGES } from '../../product-exchanges/data/product-exchanges.data';
 import { collectStrings } from '../../../shared/utils/collect-strings';
 import { matchesAllTermsByPrefix, tokenize } from '../../../shared/utils/search';
@@ -24,6 +26,8 @@ const MODULE_CONTENT: Readonly<Record<string, unknown>> = {
 
 export interface HomeSearchResults {
   readonly modules: readonly NavItem[];
+  /** Announcements of "Novedades" (title, summary, tags and content). */
+  readonly news: readonly News[];
   /** First incident types found (see `incidentTotal`). */
   readonly incidents: readonly IncidentType[];
   readonly incidentTotal: number;
@@ -31,10 +35,22 @@ export interface HomeSearchResults {
 
 const MAX_INCIDENTS = 5;
 
-/** Search of the home page: implemented modules (name, description, content) + incident types. */
+/**
+ * Search of the home page: implemented modules (name, description, content), announcements
+ * of "Novedades" and incident types.
+ */
 @Injectable({ providedIn: 'root' })
 export class HomeSearchService {
   private readonly incidentTypes = inject(IncidentTypesService);
+  private readonly newsService = inject(NewsService);
+
+  /** Search index of the announcements; rebuilt when they finish loading. */
+  private readonly newsIndex = computed(() =>
+    this.newsService.all().map((news) => ({
+      news,
+      tokens: tokenize(collectStrings(news).join(' ')),
+    })),
+  );
 
   private readonly moduleIndex = new Map(
     AVAILABLE_MODULES.map((module) => [
@@ -54,9 +70,13 @@ export class HomeSearchService {
     const modules = AVAILABLE_MODULES.filter((module) =>
       matchesAllTermsByPrefix(this.moduleIndex.get(module.path) ?? [], terms),
     );
+    const news = this.newsIndex()
+      .filter((entry) => matchesAllTermsByPrefix(entry.tokens, terms))
+      .map((entry) => entry.news);
     const incidents = this.incidentTypes.search(query);
     return {
       modules,
+      news,
       incidents: incidents.slice(0, MAX_INCIDENTS),
       incidentTotal: incidents.length,
     };

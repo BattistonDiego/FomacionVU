@@ -6,6 +6,7 @@ import {
   LucideCreditCard,
   LucideHouse,
   LucideMapPin,
+  LucideMegaphone,
   LucidePalette,
   LucideTruck,
 } from '@lucide/angular';
@@ -18,6 +19,17 @@ import { NavItem, NavSection } from './navigation.model';
  * feature routes in `app.routes.ts`.
  */
 export const HOME_ITEM: NavItem = { label: 'Inicio', path: '', icon: LucideHouse, available: true };
+
+/** Team communication (not an operational module: no home page card). */
+export const COMMUNICATION_ITEMS: readonly NavItem[] = [
+  {
+    label: 'Novedades',
+    path: 'novedades',
+    icon: LucideMegaphone,
+    available: true,
+    badge: 'unread-news',
+  },
+];
 
 export const OPERATIONS_ITEMS: readonly NavItem[] = [
   {
@@ -63,6 +75,7 @@ export const OPERATIONS_ITEMS: readonly NavItem[] = [
 
 export const NAV_SECTIONS: readonly NavSection[] = [
   { items: [HOME_ITEM] },
+  { label: 'Comunicación', items: COMMUNICATION_ITEMS },
   { label: 'Operaciones', items: OPERATIONS_ITEMS },
 ];
 

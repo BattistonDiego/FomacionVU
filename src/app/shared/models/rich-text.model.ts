@@ -7,17 +7,20 @@
  *                         (shown with a visual flag, never corrected by guessing).
  * - `{ strong }`        → bold words inside a sentence.
  * - `{ code }`          → system value shown in monospace (e.g. "paiement").
+ * - `{ emphasis }`      → key warning inside a sentence, bold and red
+ *                         (e.g. "ANTES de asignar el caso a LOG").
  */
 export type RichTextSegment =
   | string
   | { readonly highlight: string }
   | { readonly unconfirmed: string }
   | { readonly strong: string }
-  | { readonly code: string };
+  | { readonly code: string }
+  | { readonly emphasis: string };
 
 export type RichText = readonly RichTextSegment[];
 
-export type RichTextKind = 'plain' | 'highlight' | 'unconfirmed' | 'strong' | 'code';
+export type RichTextKind = 'plain' | 'highlight' | 'unconfirmed' | 'strong' | 'code' | 'emphasis';
 
 export const highlight = (value: string): RichTextSegment => ({ highlight: value });
 
@@ -27,9 +30,14 @@ export const strong = (value: string): RichTextSegment => ({ strong: value });
 
 export const code = (value: string): RichTextSegment => ({ code: value });
 
+export const emphasis = (value: string): RichTextSegment => ({ emphasis: value });
+
 export function segmentKind(segment: RichTextSegment): RichTextKind {
   if (typeof segment === 'string') {
     return 'plain';
+  }
+  if ('emphasis' in segment) {
+    return 'emphasis';
   }
   if ('highlight' in segment) {
     return 'highlight';
@@ -43,6 +51,9 @@ export function segmentKind(segment: RichTextSegment): RichTextKind {
 export function segmentText(segment: RichTextSegment): string {
   if (typeof segment === 'string') {
     return segment;
+  }
+  if ('emphasis' in segment) {
+    return segment.emphasis;
   }
   if ('highlight' in segment) {
     return segment.highlight;
