@@ -1,0 +1,108 @@
+:host {
+  display: block;
+}
+
+.steps {
+  padding: 20px;
+}
+
+.steps__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.steps__list {
+  margin-top: 8px;
+}
+
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 7px 0;
+
+  // Line linking the step markers: runs behind them, from the first centre to the last.
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 13.5px;
+    width: 1px;
+    background: var(--color-border);
+  }
+
+  &:first-child::before {
+    top: 50%;
+  }
+
+  &:last-child::before {
+    bottom: 50%;
+  }
+}
+
+.step__marker {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  color: var(--color-primary-dark);
+  font-size: 13px;
+  font-weight: 600;
+
+  .step--auto & {
+    border-color: var(--color-success);
+    background: var(--color-success);
+    color: var(--color-on-success);
+  }
+}
+
+.step__body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--color-text);
+
+  .step--auto & {
+    padding: 9px 12px;
+    border: 1px dashed var(--color-success-border);
+    border-radius: var(--radius-md);
+    background: var(--color-success-bg);
+    color: var(--color-success-text);
+    font-weight: 500;
+  }
+}
+
+// Looks like a field of the internal system.
+.step__chip {
+  padding: 2px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-subtle);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.step__badge {
+  padding: 1px 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-success-text);
+  color: var(--color-surface);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}

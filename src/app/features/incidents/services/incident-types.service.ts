@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { INCIDENT_TYPES } from '../data/incident-types.data';
-import { IncidentType } from '../models/incident-type.model';
+import { IncidentType, RefundRule } from '../models/incident-type.model';
 import { blocksToPlainText } from '../../../shared/models/content-block.model';
 import { FilterOption } from '../../../shared/models/filter-option.model';
+import { richTextToPlain } from '../../../shared/models/rich-text.model';
 import { matchesAllTermsByPrefix, normalizeForSearch, tokenize } from '../../../shared/utils/search';
 
 /** A term such as "pr1" must match the code exactly, so it does not also return PR12. */
@@ -30,8 +31,9 @@ export class IncidentTypesService {
   }
 
   /**
-   * Accent- and case-insensitive search over names (ES/FR), code, concept and
-   * responsibilities. Every term must be the beginning of a word; codes match exactly.
+   * Accent- and case-insensitive search over names (ES/FR), code, concept,
+   * responsibilities and the refund rule section. Every term must be the beginning of a
+   * word; codes match exactly.
    */
   search(query: string): readonly IncidentType[] {
     const terms = tokenize(query);
@@ -81,8 +83,32 @@ function buildSearchWords(incident: IncidentType): string[] {
       incident.openedBy,
       blocksToPlainText(incident.concept),
       blocksToPlainText(incident.managedBy),
+      refundRuleText(incident.refundRule),
     ].join(' '),
   );
+}
+
+/**
+ * Visible texts of the "Regla de anulación y reembolso" section (titles, highlights, steps,
+ * chips and tip). Listed explicitly so internal values (`success`, `plus`…) are not indexed.
+ */
+function refundRuleText(rule: RefundRule | undefined): string {
+  if (!rule) {
+    return '';
+  }
+  return [
+    rule.title,
+    ...rule.scenarios.flatMap((scenario) => [
+      scenario.titleStart + scenario.titleKeyword + scenario.titleEnd,
+      scenario.subtitle,
+      scenario.outcome,
+      scenario.badge ?? '',
+      scenario.detail,
+    ]),
+    rule.stepsTitle,
+    ...rule.steps.flatMap((step) => [step.text, step.chip ?? '']),
+    richTextToPlain(rule.tip),
+  ].join(' ');
 }
 
 function countBy<T>(items: readonly T[], key: (item: T) => string): Map<string, number> {

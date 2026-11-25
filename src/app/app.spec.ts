@@ -44,7 +44,11 @@ describe('App routing', () => {
       await harness.navigateByUrl(url);
       expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toContain(heading);
     }
-  });
+    // Loads 7 lazy routes in a row (~3 s with the whole suite running): above the 5 s default
+    // it failed intermittently, so this test gets its own limit.
+    // TODO: if more routes are added, split this into one test per route (e.g. `it.each`)
+    // instead of raising the limit again.
+  }, 15_000);
 
   it('keeps the placeholder page for planned modules', async () => {
     const harness = await RouterTestingHarness.create('/escalados');

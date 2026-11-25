@@ -8,6 +8,7 @@ import {
   LucideUsers,
 } from '@lucide/angular';
 
+import { RefundRuleSection } from '../../components/refund-rule/refund-rule';
 import { IncidentListState } from '../../services/incident-list-state';
 import { IncidentTypesService } from '../../services/incident-types.service';
 import { Breadcrumb } from '../../../../shared/components/breadcrumb/breadcrumb';
@@ -21,6 +22,7 @@ import { BreadcrumbItem } from '../../../../shared/models/breadcrumb.model';
     RouterLink,
     Breadcrumb,
     ContentBlocks,
+    RefundRuleSection,
     LucideArrowLeft,
     LucideCircleAlert,
     LucideDoorOpen,

@@ -1,0 +1,86 @@
+// Two cards side by side; one column when the main column gets narrow.
+:host {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 14px;
+}
+
+.scenario {
+  --tone-text: var(--color-success-text);
+  --tone-bg: var(--color-success-bg);
+  --tone-border: var(--color-success-border);
+
+  padding: 18px;
+  border: 1px solid var(--tone-border);
+  border-radius: var(--radius-lg);
+  background: var(--tone-bg);
+
+  &--attention {
+    --tone-text: var(--color-attention-text);
+    --tone-bg: var(--color-attention-bg);
+    --tone-border: var(--color-attention-border);
+  }
+}
+
+.scenario__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.scenario__keyword {
+  color: var(--tone-text);
+}
+
+.scenario__subtitle {
+  margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.outcome {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--tone-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.outcome__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+}
+
+.outcome__value {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--tone-text);
+}
+
+.outcome__badge {
+  padding: 2px 9px;
+  border-radius: var(--radius-full);
+  background: var(--color-success-text);
+  color: var(--color-surface);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.outcome__detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-text-strong);
+}
+
+.outcome__sign {
+  margin-top: 2px;
+  color: var(--tone-text);
+}

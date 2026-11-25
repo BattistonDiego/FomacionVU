@@ -36,6 +36,9 @@
       <section class="detail__main" aria-labelledby="concept-title">
         <h2 id="concept-title" class="section-title">Concepto</h2>
         <app-content-blocks [blocks]="item.concept" />
+        @if (item.refundRule) {
+          <app-refund-rule [rule]="item.refundRule" />
+        }
       </section>
 
       <aside class="detail__aside card" aria-label="Responsables">

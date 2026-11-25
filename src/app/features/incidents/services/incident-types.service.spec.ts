@@ -29,6 +29,18 @@ describe('IncidentTypesService', () => {
     expect(names(service.search('Remboursement'))).toEqual(['Anulación antes de la expedición']);
   });
 
+  it('searches the refund rule section (scenarios, highlights, steps, chips and tip)', () => {
+    const codes = (query: string) => service.search(query).map((item) => item.code);
+    expect(codes('reembolso')).toEqual(['PR7']);
+    expect(codes('gastos de envío')).toEqual(['PR7']);
+    expect(codes('solo el valor del producto')).toEqual(['PR7']);
+    expect(codes('desea anular')).toEqual(['PR7']);
+    expect(codes('reclamaciones')).toEqual(['PR7']);
+    // Internal values of the model are not indexed.
+    expect(codes('attention')).toEqual([]);
+    expect(codes('minus')).toEqual([]);
+  });
+
   it('requires every term to match', () => {
     expect(names(service.search('cambiar EDI'))).toEqual(['Cambio']);
   });

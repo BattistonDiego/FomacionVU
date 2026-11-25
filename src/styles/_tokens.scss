@@ -74,6 +74,19 @@
   --color-success-border: #bbf7d0;
   --color-on-success: #ffffff;
 
+  // Attention (orange): "be careful" without meaning error (e.g. cancellation after shipping).
+  // Not the same as --color-warning-* (yellow "OJO" notes).
+  --color-attention-text: #c2410c;
+  --color-attention-bg: #fff7ed;
+  --color-attention-border: #fed7aa;
+  --color-attention-icon: #ea580c;
+
+  // Info (blue): tips and neutral guidance.
+  --color-info-text: #1e40af;
+  --color-info-bg: #eff6ff;
+  --color-info-border: #bfdbfe;
+  --color-info-icon: #2563eb;
+
   // Identification screen backdrop
   --color-decor-dot: #e2e2e2;
   --color-decor-line: #ececec;
@@ -163,6 +176,17 @@
   --color-success-bg: #0f2318;
   --color-success-border: #1d4a2e;
   --color-on-success: #052e16;
+
+  // Attention / Info: translucent tints over the graphite surface, light text.
+  --color-attention-text: #fdba74;
+  --color-attention-bg: rgb(249 115 22 / 10%);
+  --color-attention-border: rgb(249 115 22 / 32%);
+  --color-attention-icon: #fb923c;
+
+  --color-info-text: #93c5fd;
+  --color-info-bg: rgb(59 130 246 / 10%);
+  --color-info-border: rgb(59 130 246 / 32%);
+  --color-info-icon: #60a5fa;
 
   // Identification screen backdrop
   --color-decor-dot: #2a2a2a;

@@ -1,5 +1,6 @@
 import { IncidentType } from '../models/incident-type.model';
 import { note, PENDING, text } from '../../../shared/models/content-block.model';
+import { strong } from '../../../shared/models/rich-text.model';
 
 /**
  * Incident types transcribed from the original documentation (spreadsheet screenshot,
@@ -136,6 +137,47 @@ export const INCIDENT_TYPES: readonly IncidentType[] = [
     ],
     openedBy: 'SC/CLIENTE',
     managedBy: [text('EDI (LOG)'), text('NO EDI (Remboursement)')],
+    // Texts given by the content owner (2026-11-25), not part of the original spreadsheet.
+    refundRule: {
+      title: 'Regla de anulación y reembolso (SAV)',
+      scenarios: [
+        {
+          tone: 'success',
+          titleStart: 'Anulación ',
+          titleKeyword: 'ANTES',
+          titleEnd: ' de la expedición',
+          subtitle: 'El pedido aún no ha salido del almacén',
+          outcome: 'Reembolso total',
+          badge: '100%',
+          detail: 'Producto + gastos de envío',
+          detailSign: 'plus',
+        },
+        {
+          tone: 'attention',
+          titleStart: 'Anulación ',
+          titleKeyword: 'DESPUÉS',
+          titleEnd: ' de la expedición',
+          subtitle: 'El pedido ya ha salido del almacén / está con el transportista',
+          outcome: 'Solo el valor del producto',
+          detail: 'Se descuentan los gastos de envío / devolución',
+          detailSign: 'minus',
+        },
+      ],
+      stepsTitle: 'Paso a paso en el sistema',
+      steps: [
+        { text: 'Abrir la incidencia de anulación' },
+        { text: 'Marcar la opción', chip: '¿Desea anular?: Sí' },
+        { text: 'Asignar la incidencia a', chip: 'Reembolso' },
+        {
+          text: 'El proceso de reembolso se inicia automáticamente en el sistema',
+          automatic: true,
+        },
+      ],
+      tip: [
+        strong('Consejo:'),
+        ' si el pedido ya ha sido expedido, avisa siempre al cliente, antes de confirmar la anulación, de que los gastos de envío/devolución se descontarán del importe final a recibir. Así se evitan reclamaciones después.',
+      ],
+    },
   },
 
   // #8 — source: "Retractation APRES expedition (PR8) Anulacion antes de la expedicion (PR8)"
