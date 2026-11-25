@@ -1,0 +1,10 @@
+# Store and check out every text file with LF line endings (matches Prettier's
+# "endOfLine": "lf"), regardless of each developer's core.autocrlf setting.
+* text=auto eol=lf
+
+# Binary files: never touch their bytes.
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff binary
+*.woff2 binary
