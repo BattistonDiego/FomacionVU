@@ -38,6 +38,53 @@ export interface RefundRule {
   readonly tip: RichText;
 }
 
+/** A bonus amount: fixed euros or a percentage of the shipping costs. */
+export interface BonusValue {
+  readonly kind: 'fixed' | 'percent';
+  readonly value: number;
+}
+
+/** Column group of the bonus table (e.g. "Gastos de envío menos de 150 €"). */
+export interface BonusColumnGroup {
+  readonly title: string;
+  readonly legend: string;
+  /** `neutral` = grey header, `info` = blue header. */
+  readonly tone: 'neutral' | 'info';
+  /** Sub-columns, e.g. "1h – 24h", "Más de 24h". */
+  readonly columns: readonly string[];
+}
+
+export interface BonusRow {
+  /** Delivery type, e.g. "Messagerie". */
+  readonly label: string;
+  /** One value per sub-column, in group order. */
+  readonly values: readonly BonusValue[];
+}
+
+export interface BonusTable {
+  /** Accessible caption (visually hidden). */
+  readonly caption: string;
+  /** Header of the first column, e.g. "Tipo de entrega". */
+  readonly rowHeader: string;
+  readonly groups: readonly BonusColumnGroup[];
+  readonly rows: readonly BonusRow[];
+}
+
+/** "How to read the table" item. */
+export interface BonusCriterion {
+  readonly icon: 'shipping-cost' | 'delay';
+  readonly text: RichText;
+}
+
+/** "Bonos por retraso en la entrega" section of an incident type. */
+export interface BonusRule {
+  readonly title: string;
+  readonly notice: RichText;
+  readonly criteria: readonly BonusCriterion[];
+  readonly table: BonusTable;
+  readonly examples: readonly RichText[];
+}
+
 /**
  * An incident type as described in the original documentation
  * (columns: Tipo de incidencia · Concepto · ¿Quién abre? · ¿Quién la va a gestionar?).
@@ -65,4 +112,6 @@ export interface IncidentType {
   readonly sourceWarning?: string;
   /** Cancellation and refund rule (SAV). Only types that have it show the section. */
   readonly refundRule?: RefundRule;
+  /** Delay bonus rule. Only types that have it show the section. */
+  readonly bonusRule?: BonusRule;
 }

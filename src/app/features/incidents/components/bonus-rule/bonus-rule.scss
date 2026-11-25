@@ -1,0 +1,50 @@
+:host {
+  display: block;
+}
+
+// ── "Importante: no hacemos reembolsos." ──
+.notice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--color-primary-border);
+  border-radius: var(--radius-md);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.notice__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  flex-shrink: 0;
+}
+
+// ── How to read the table: two small cards, one column when narrow ──
+.criteria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 12px;
+}
+
+.criterion {
+  display: flex;
+  gap: 10px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-text);
+}
+
+.criterion__icon {
+  margin-top: 2px;
+  color: var(--color-primary-accent);
+}

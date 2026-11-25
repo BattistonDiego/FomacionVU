@@ -1,0 +1,98 @@
+:host {
+  display: block;
+}
+
+// Card that scrolls horizontally when the table does not fit (narrow screens).
+.scroller {
+  overflow-x: auto;
+  padding: 0;
+
+  &:focus-visible {
+    box-shadow: var(--focus-ring);
+  }
+}
+
+// 560px fits the main column on a 1280px desktop (~620px); below that the card scrolls.
+.bonus {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 14px;
+  text-align: center;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+// ── Header ──
+thead th {
+  font-weight: 600;
+  color: var(--color-text-strong);
+  background: var(--color-surface-subtle);
+
+  &.is-info {
+    background: var(--color-info-bg);
+  }
+}
+
+.bonus__corner {
+  vertical-align: bottom;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+}
+
+.bonus__group {
+  padding-top: 14px;
+}
+
+.bonus__group-title {
+  display: block;
+  font-size: 13.5px;
+}
+
+.bonus__group-legend {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+.bonus__column {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+// Subtle vertical line between the two groups.
+.starts-group {
+  border-left: 1px solid var(--color-border);
+}
+
+// ── Body ──
+.bonus__row-label {
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-text-strong);
+  border-right: 1px solid var(--color-border);
+}
+
+.bonus__value {
+  font-weight: 600;
+  color: var(--color-text-strong);
+  white-space: nowrap;
+
+  &.is-percent {
+    color: var(--color-info-text);
+  }
+}

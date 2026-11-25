@@ -1,0 +1,68 @@
+@let t = table();
+
+<div class="scroller card" tabindex="0" role="region" [attr.aria-label]="t.caption">
+  <table class="bonus">
+    <caption class="visually-hidden">
+      {{
+        t.caption
+      }}
+    </caption>
+    <!-- Column groups referenced by the scope="colgroup" headers. -->
+    <colgroup>
+      <col />
+    </colgroup>
+    @for (group of t.groups; track $index) {
+      <colgroup [attr.span]="group.columns.length"></colgroup>
+    }
+    <thead>
+      <tr>
+        <th scope="col" rowspan="2" class="bonus__corner">{{ t.rowHeader }}</th>
+        @for (group of t.groups; track $index) {
+          <th
+            scope="colgroup"
+            [attr.colspan]="group.columns.length"
+            class="bonus__group"
+            [class.is-info]="group.tone === 'info'"
+            [class.starts-group]="$index > 0"
+          >
+            <!-- &ngsp; keeps a space between title and legend for screen readers. -->
+            <span class="bonus__group-title">{{ group.title }}</span>&ngsp;<span
+              class="bonus__group-legend"
+              >{{ group.legend }}</span
+            >
+          </th>
+        }
+      </tr>
+      <tr>
+        @for (group of t.groups; track $index; let g = $index) {
+          @for (column of group.columns; track $index) {
+            <th
+              scope="col"
+              class="bonus__column"
+              [class.is-info]="group.tone === 'info'"
+              [class.starts-group]="g > 0 && $index === 0"
+            >
+              {{ column }}
+            </th>
+          }
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of t.rows; track row.label) {
+        <tr>
+          <th scope="row" class="bonus__row-label">{{ row.label }}</th>
+          @for (value of row.values; track $index) {
+            <td
+              class="bonus__value"
+              [class.is-percent]="value.kind === 'percent'"
+              [class.starts-group]="startsGroup(t, $index)"
+            >
+              {{ value | bonusValue }}
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

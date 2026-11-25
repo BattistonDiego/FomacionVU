@@ -31,14 +31,28 @@ describe('IncidentTypesService', () => {
 
   it('searches the refund rule section (scenarios, highlights, steps, chips and tip)', () => {
     const codes = (query: string) => service.search(query).map((item) => item.code);
-    expect(codes('reembolso')).toEqual(['PR7']);
-    expect(codes('gastos de envío')).toEqual(['PR7']);
-    expect(codes('solo el valor del producto')).toEqual(['PR7']);
+    // PR12 also matches: its bonus section says "no hacemos reembolsos" and talks about the
+    // "gastos de envío" and the "valor del producto".
+    expect(codes('reembolso')).toEqual(['PR12', 'PR7']);
+    expect(codes('gastos de envío')).toEqual(['PR12', 'PR7']);
+    expect(codes('reembolso total')).toEqual(['PR7']);
     expect(codes('desea anular')).toEqual(['PR7']);
     expect(codes('reclamaciones')).toEqual(['PR7']);
     // Internal values of the model are not indexed.
     expect(codes('attention')).toEqual([]);
     expect(codes('minus')).toEqual([]);
+  });
+
+  it('searches the bonus rule section (notice, criteria, table and examples)', () => {
+    const codes = (query: string) => service.search(query).map((item) => item.code);
+    expect(codes('bono')).toEqual(['PR12']);
+    expect(codes('Messagerie')).toEqual(['PR12']);
+    expect(codes('no hacemos reembolsos')).toEqual(['PR12']);
+    expect(codes('tiempo de retraso')).toEqual(['PR12']);
+    expect(codes('importe fijo')).toEqual(['PR12']);
+    // Internal values of the model are not indexed.
+    expect(codes('percent')).toEqual([]);
+    expect(codes('shipping')).toEqual([]);
   });
 
   it('requires every term to match', () => {

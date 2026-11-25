@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { INCIDENT_TYPES } from '../data/incident-types.data';
-import { IncidentType, RefundRule } from '../models/incident-type.model';
+import { BonusRule, IncidentType, RefundRule } from '../models/incident-type.model';
+import { formatBonusValue } from '../utils/format-bonus-value';
 import { blocksToPlainText } from '../../../shared/models/content-block.model';
 import { FilterOption } from '../../../shared/models/filter-option.model';
 import { richTextToPlain } from '../../../shared/models/rich-text.model';
@@ -32,7 +33,7 @@ export class IncidentTypesService {
 
   /**
    * Accent- and case-insensitive search over names (ES/FR), code, concept,
-   * responsibilities and the refund rule section. Every term must be the beginning of a
+   * responsibilities and the refund / bonus rule sections. Every term must be the beginning of a
    * word; codes match exactly.
    */
   search(query: string): readonly IncidentType[] {
@@ -84,8 +85,30 @@ function buildSearchWords(incident: IncidentType): string[] {
       blocksToPlainText(incident.concept),
       blocksToPlainText(incident.managedBy),
       refundRuleText(incident.refundRule),
+      bonusRuleText(incident.bonusRule),
     ].join(' '),
   );
+}
+
+/**
+ * Visible texts of the "Bonos por retraso en la entrega" section (notice, criteria, table
+ * headers, delivery types, formatted amounts and examples). Internal values are not indexed.
+ */
+function bonusRuleText(rule: BonusRule | undefined): string {
+  if (!rule) {
+    return '';
+  }
+  const { table } = rule;
+  return [
+    rule.title,
+    richTextToPlain(rule.notice),
+    ...rule.criteria.map((criterion) => richTextToPlain(criterion.text)),
+    table.caption,
+    table.rowHeader,
+    ...table.groups.flatMap((group) => [group.title, group.legend, ...group.columns]),
+    ...table.rows.flatMap((row) => [row.label, ...row.values.map(formatBonusValue)]),
+    ...rule.examples.map(richTextToPlain),
+  ].join(' ');
 }
 
 /**

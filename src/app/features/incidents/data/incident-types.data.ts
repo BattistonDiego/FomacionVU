@@ -120,6 +120,96 @@ export const INCIDENT_TYPES: readonly IncidentType[] = [
     ],
     openedBy: 'SC/CLIENTE',
     managedBy: [text('LOG')],
+    // Texts and amounts given by the content owner (2026-11-25), not part of the original
+    // spreadsheet. " " (no-break space) keeps "30 €" / "30 %" on one line.
+    bonusRule: {
+      title: 'Bonos por retraso en la entrega',
+      notice: [
+        strong('Importante: no hacemos reembolsos.'),
+        ' Ofrecemos un bono al cliente para sus futuras compras.',
+      ],
+      criteria: [
+        {
+          icon: 'shipping-cost',
+          text: [
+            'El bono se calcula sobre ',
+            strong('los gastos de envío'),
+            ', no sobre el valor del producto.',
+          ],
+        },
+        {
+          icon: 'delay',
+          text: [
+            'Depende del ',
+            strong('importe de los gastos de envío'),
+            ' (menos o más de 150 €) y del ',
+            strong('tiempo de retraso'),
+            ' (1h–24h o más de 24h).',
+          ],
+        },
+      ],
+      table: {
+        caption: 'Bonos por tipo de entrega, importe de los gastos de envío y tiempo de retraso',
+        rowHeader: 'Tipo de entrega',
+        groups: [
+          {
+            title: 'Gastos de envío menos de 150 €',
+            legend: 'Bono de importe fijo (€)',
+            tone: 'neutral',
+            columns: ['1h – 24h', 'Más de 24h'],
+          },
+          {
+            title: 'Gastos de envío más de 150 €',
+            legend: '% sobre los gastos de envío',
+            tone: 'info',
+            columns: ['1h – 24h', 'Más de 24h'],
+          },
+        ],
+        rows: [
+          {
+            label: 'Messagerie',
+            values: [
+              { kind: 'fixed', value: 20 },
+              { kind: 'fixed', value: 30 },
+              { kind: 'percent', value: 30 },
+              { kind: 'percent', value: 40 },
+            ],
+          },
+          {
+            label: 'LC',
+            values: [
+              { kind: 'fixed', value: 25 },
+              { kind: 'fixed', value: 50 },
+              { kind: 'percent', value: 30 },
+              { kind: 'percent', value: 40 },
+            ],
+          },
+          {
+            label: 'LS',
+            values: [
+              { kind: 'fixed', value: 25 },
+              { kind: 'fixed', value: 50 },
+              { kind: 'percent', value: 30 },
+              { kind: 'percent', value: 40 },
+            ],
+          },
+        ],
+      },
+      examples: [
+        [
+          strong('Ejemplo 1:'),
+          ' entrega Messagerie, gastos de envío 50 € (menos de 150 €), retraso de 30h → bono de ',
+          strong('30 €'),
+          '.',
+        ],
+        [
+          strong('Ejemplo 2:'),
+          ' entrega LC, gastos de envío 200 € (más de 150 €), retraso de 10h → bono del 30 % de 200 € = ',
+          strong('60 €'),
+          '.',
+        ],
+      ],
+    },
   },
 
   // #7 — source: "Retractation AVANT expedition / Anulacion antes de la expedicion (PR7)"

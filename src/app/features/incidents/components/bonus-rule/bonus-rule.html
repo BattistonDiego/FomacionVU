@@ -1,0 +1,30 @@
+@let r = rule();
+
+<app-detail-section [heading]="r.title" headingId="bonus-rule-title">
+  <!-- Stronger than the "OJO" note and the tip: red, with a solid icon tile. -->
+  <p class="notice" role="note">
+    <span class="notice__icon" aria-hidden="true"><svg lucideBan [size]="18"></svg></span>
+    <span class="notice__text"><app-rich-text [text]="r.notice" /></span>
+  </p>
+
+  <ul class="criteria" aria-label="Cómo se calcula el bono">
+    @for (item of r.criteria; track $index) {
+      <li class="criterion card">
+        @if (item.icon === 'shipping-cost') {
+          <svg lucideTruck class="criterion__icon" [size]="18" aria-hidden="true"></svg>
+        } @else {
+          <svg lucideClock class="criterion__icon" [size]="18" aria-hidden="true"></svg>
+        }
+        <span><app-rich-text [text]="item.text" /></span>
+      </li>
+    }
+  </ul>
+
+  <app-bonus-table [table]="r.table" />
+
+  <app-tip-box>
+    @for (example of r.examples; track $index) {
+      <p><app-rich-text [text]="example" /></p>
+    }
+  </app-tip-box>
+</app-detail-section>

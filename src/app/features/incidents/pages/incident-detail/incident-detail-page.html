@@ -39,6 +39,9 @@
         @if (item.refundRule) {
           <app-refund-rule [rule]="item.refundRule" />
         }
+        @if (item.bonusRule) {
+          <app-bonus-rule [rule]="item.bonusRule" />
+        }
       </section>
 
       <aside class="detail__aside card" aria-label="Responsables">

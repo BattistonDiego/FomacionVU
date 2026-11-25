@@ -132,4 +132,106 @@ describe('IncidentDetailPage', () => {
       expect(clean(tip)).toContain('Así se evitan reclamaciones después.');
     });
   });
+
+  describe('"Bonos por retraso en la entrega" section', () => {
+    const clean = (el: Element | null | undefined) => el?.textContent?.replace(/\s+/g, ' ').trim();
+    const all = (root: ParentNode, selector: string) =>
+      [...root.querySelectorAll(selector)].map((el) => clean(el));
+    const PR12 = 'pr12-retraso-en-la-entrega';
+
+    it('is shown on PR12, below "Concepto", labelled by its title', async () => {
+      const page = await open(PR12);
+      const section = page.querySelector('app-bonus-rule section');
+      expect(section?.getAttribute('aria-labelledby')).toBe('bonus-rule-title');
+      expect(clean(page.querySelector('#bonus-rule-title'))).toBe(
+        'Bonos por retraso en la entrega',
+      );
+      const main = page.querySelector('.detail__main')!;
+      expect(main.lastElementChild?.tagName.toLowerCase()).toBe('app-bonus-rule');
+      expect(main.querySelector('.block--note')).not.toBeNull();
+    });
+
+    it('is not shown on incident types without bonusRule (PR6, PR7)', async () => {
+      expect((await open('pr6-sufrimiento')).querySelector('app-bonus-rule')).toBeNull();
+      TestBed.resetTestingModule();
+      const pr7 = await open('pr7-anulacion-antes-de-la-expedicion');
+      expect(pr7.querySelector('app-bonus-rule')).toBeNull();
+      expect(pr7.querySelector('app-refund-rule')).not.toBeNull();
+    });
+
+    it('shows the "no refunds" notice and how to read the table, with correct spacing', async () => {
+      const page = await open(PR12);
+      expect(clean(page.querySelector('.notice'))).toBe(
+        'Importante: no hacemos reembolsos. Ofrecemos un bono al cliente para sus futuras compras.',
+      );
+      expect(all(page, '.criterion')).toEqual([
+        'El bono se calcula sobre los gastos de envío, no sobre el valor del producto.',
+        'Depende del importe de los gastos de envío (menos o más de 150 €) y del tiempo de retraso (1h–24h o más de 24h).',
+      ]);
+    });
+
+    it('renders a real table with a hidden caption and a two-level header', async () => {
+      const page = await open(PR12);
+      const table = page.querySelector('app-bonus-table table')!;
+      expect(clean(table.querySelector('caption'))).toBe(
+        'Bonos por tipo de entrega, importe de los gastos de envío y tiempo de retraso',
+      );
+      expect(table.querySelector('caption')?.classList).toContain('visually-hidden');
+
+      const corner = table.querySelector('thead tr:first-child th:first-child')!;
+      expect(clean(corner)).toBe('Tipo de entrega');
+      expect(corner.getAttribute('rowspan')).toBe('2');
+
+      const groups = [...table.querySelectorAll('th[scope="colgroup"]')];
+      expect(groups.map((th) => th.getAttribute('colspan'))).toEqual(['2', '2']);
+      // Title and legend are read with a space between them.
+      expect(groups.map((th) => clean(th))).toEqual([
+        'Gastos de envío menos de 150 € Bono de importe fijo (€)',
+        'Gastos de envío más de 150 € % sobre los gastos de envío',
+      ]);
+      expect(groups[1].classList).toContain('is-info');
+      expect(all(table, 'thead th.bonus__column')).toEqual([
+        '1h – 24h',
+        'Más de 24h',
+        '1h – 24h',
+        'Más de 24h',
+      ]);
+    });
+
+    it('has 3 rows with the right, Spanish-formatted values', async () => {
+      const page = await open(PR12);
+      const rows = [...page.querySelectorAll('app-bonus-table tbody tr')];
+      expect(rows.length).toBe(3);
+      expect(rows.map((row) => clean(row.querySelector('th[scope="row"]')))).toEqual([
+        'Messagerie',
+        'LC',
+        'LS',
+      ]);
+      expect(rows.map((row) => all(row, 'td'))).toEqual([
+        ['20 €', '30 €', '30 %', '40 %'],
+        ['25 €', '50 €', '30 %', '40 %'],
+        ['25 €', '50 €', '30 %', '40 %'],
+      ]);
+      // No-break space before the symbol; style comes from the value kind.
+      const cells = [...rows[0].querySelectorAll('td')];
+      expect(cells[0].textContent?.trim()).toBe('20 €');
+      expect(cells[2].textContent?.trim()).toBe('30 %');
+      expect(cells.map((td) => td.classList.contains('is-percent'))).toEqual([
+        false,
+        false,
+        true,
+        true,
+      ]);
+    });
+
+    it('ends with the two examples in the blue tip box', async () => {
+      const page = await open(PR12);
+      const tip = page.querySelector('app-bonus-rule .tip');
+      expect(tip?.getAttribute('role')).toBe('note');
+      expect(all(tip!, 'p')).toEqual([
+        'Ejemplo 1: entrega Messagerie, gastos de envío 50 € (menos de 150 €), retraso de 30h → bono de 30 €.',
+        'Ejemplo 2: entrega LC, gastos de envío 200 € (más de 150 €), retraso de 10h → bono del 30 % de 200 € = 60 €.',
+      ]);
+    });
+  });
 });
