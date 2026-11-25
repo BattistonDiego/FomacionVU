@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { LucideCheck, LucideCopy } from '@lucide/angular';
 
 /** Monospace value with a "Copiar" button (e.g. escalade subject or text examples). */
@@ -7,7 +14,12 @@ import { LucideCheck, LucideCopy } from '@lucide/angular';
   imports: [LucideCheck, LucideCopy],
   template: `
     <code class="snippet__value">{{ value() }}</code>
-    <button type="button" class="snippet__button" (click)="copy()" [attr.aria-label]="'Copiar «' + value() + '»'">
+    <button
+      type="button"
+      class="snippet__button"
+      (click)="copy()"
+      [attr.aria-label]="'Copiar «' + value() + '»'"
+    >
       @if (copied()) {
         <svg lucideCheck [size]="14"></svg>
         Copiado
@@ -16,7 +28,9 @@ import { LucideCheck, LucideCopy } from '@lucide/angular';
         Copiar
       }
     </button>
-    <span class="visually-hidden" aria-live="polite">{{ copied() ? 'Copiado al portapapeles' : '' }}</span>
+    <span class="visually-hidden" aria-live="polite">{{
+      copied() ? 'Copiado al portapapeles' : ''
+    }}</span>
   `,
   styleUrl: './copy-snippet.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

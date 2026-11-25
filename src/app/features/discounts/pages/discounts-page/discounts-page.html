@@ -36,7 +36,9 @@
 
 <section class="section" [attr.aria-labelledby]="validated.id + '-title'">
   <header class="section__header">
-    <h2 class="section__title" [id]="validated.id + '-title'" tabindex="-1">{{ validated.title }}</h2>
+    <h2 class="section__title" [id]="validated.id + '-title'" tabindex="-1">
+      {{ validated.title }}
+    </h2>
     <p class="section__description">{{ validated.description }}</p>
   </header>
   <div class="scenarios">

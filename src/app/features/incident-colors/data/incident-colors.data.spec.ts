@@ -21,8 +21,16 @@ describe('INCIDENT_COLORS (transcription of the "Colores incidencias" documentat
 
   it('uses the colours measured on the documentation bands', () => {
     expect(INCIDENT_COLOR_CATEGORIES.map((c) => c.swatch.hex)).toEqual([
-      '#D8E4BC', '#B8CCE4', '#E6B8B7', '#DC9B9A', '#F67FB6',
-      '#CCC0DA', '#D9D9D9', '#F5F5F5', '#C4BD97', '#FCD5B4',
+      '#D8E4BC',
+      '#B8CCE4',
+      '#E6B8B7',
+      '#DC9B9A',
+      '#F67FB6',
+      '#CCC0DA',
+      '#D9D9D9',
+      '#F5F5F5',
+      '#C4BD97',
+      '#FCD5B4',
     ]);
     expect(byId('gris-con-rayas-cliente').swatch.stripeHex).toBe('#E8E8E8');
   });
@@ -47,9 +55,18 @@ describe('INCIDENT_COLORS (transcription of the "Colores incidencias" documentat
       c.roles.map((r) => `${r.label}:${r.assignment ?? '-'}`),
     );
     expect(rules).toEqual([
-      'SC:-', 'SUP SC:afectamos', 'SAV:-', 'SUP SAV:-', 'LOG:-', 'SUP LOG:no-afectamos',
-      'Transporteur:no-afectamos', 'Reprise:no-afectamos', 'Echange:no-afectamos',
-      'Remboursement:afectamos', 'Client:no-afectamos', 'APPROS:no-afectamos',
+      'SC:-',
+      'SUP SC:afectamos',
+      'SAV:-',
+      'SUP SAV:-',
+      'LOG:-',
+      'SUP LOG:no-afectamos',
+      'Transporteur:no-afectamos',
+      'Reprise:no-afectamos',
+      'Echange:no-afectamos',
+      'Remboursement:afectamos',
+      'Client:no-afectamos',
+      'APPROS:no-afectamos',
     ]);
   });
 
@@ -62,6 +79,10 @@ describe('INCIDENT_COLORS (transcription of the "Colores incidencias" documentat
 
   it('groups LOG, Transporteur and Reprise under "Bloque rosas"', () => {
     const rosas = INCIDENT_COLOR_GROUPS.find((g) => g.title === 'Bloque rosas')!;
-    expect(rosas.categories.map((c) => c.shortLabel)).toEqual(['Salmón LOG y SUP Log', 'Transporteur', 'Reprise']);
+    expect(rosas.categories.map((c) => c.shortLabel)).toEqual([
+      'Salmón LOG y SUP Log',
+      'Transporteur',
+      'Reprise',
+    ]);
   });
 });

@@ -3,7 +3,8 @@
 <header class="welcome">
   <h1 class="welcome__title">¡Bienvenido a SupportHub!</h1>
   <p class="welcome__subtitle">
-    Toda la información que necesitas para gestionar la atención al cliente, organizada en un solo lugar.
+    Toda la información que necesitas para gestionar la atención al cliente, organizada en un solo
+    lugar.
   </p>
 </header>
 
@@ -28,7 +29,9 @@
           @for (module of r.modules; track module.path) {
             <li>
               <a class="result" [routerLink]="['/', module.path]">
-                <span class="icon-tile result__icon"><svg [lucideIcon]="module.icon" [size]="16"></svg></span>
+                <span class="icon-tile result__icon"
+                  ><svg [lucideIcon]="module.icon" [size]="16"></svg
+                ></span>
                 <span class="result__text">
                   <span class="result__title">{{ module.label }}</span>
                   <span class="result__meta">{{ module.description }}</span>
@@ -79,7 +82,9 @@
           }
         </ul>
         <a class="results__all" routerLink="/incidencias" [queryParams]="{ q: query().trim() }">
-          Ver {{ r.incidentTotal === 1 ? 'el resultado' : 'los ' + r.incidentTotal + ' resultados' }} en Incidencias
+          Ver
+          {{ r.incidentTotal === 1 ? 'el resultado' : 'los ' + r.incidentTotal + ' resultados' }} en
+          Incidencias
           <svg lucideArrowRight [size]="15"></svg>
         </a>
       }
@@ -95,7 +100,9 @@
     @for (module of modules; track module.path) {
       <li>
         <a class="module card" [routerLink]="['/', module.path]">
-          <span class="icon-tile module__icon"><svg [lucideIcon]="module.icon" [size]="20"></svg></span>
+          <span class="icon-tile module__icon"
+            ><svg [lucideIcon]="module.icon" [size]="20"></svg
+          ></span>
           <span class="module__name">{{ module.label }}</span>
           <span class="module__description">{{ module.description }}</span>
           <svg lucideArrowRight class="module__arrow" [size]="16"></svg>

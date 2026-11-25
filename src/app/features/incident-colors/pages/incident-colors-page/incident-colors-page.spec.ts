@@ -28,7 +28,9 @@ describe('IncidentColorsPage', () => {
   });
 
   it('paints the band and labels with the documentation colour', () => {
-    const green = page.querySelector<HTMLElement>('app-color-category .band__row:not(.band__row--head)');
+    const green = page.querySelector<HTMLElement>(
+      'app-color-category .band__row:not(.band__row--head)',
+    );
     expect(green?.style.background).toBe('rgb(216, 228, 188)'); // #D8E4BC
   });
 

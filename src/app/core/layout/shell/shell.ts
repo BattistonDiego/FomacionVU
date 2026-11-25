@@ -45,8 +45,8 @@ export class Shell {
     });
 
     let previousPath = '';
-    const subscription = router
-      .events.pipe(filter((event) => event instanceof NavigationEnd))
+    const subscription = router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event) => {
         this.layout.closeMobileNav();
         // Scroll to top only when the page changes, not when only the query string

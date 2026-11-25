@@ -38,7 +38,9 @@
   <header class="ojo__header">
     <span class="ojo__icon"><svg lucideTriangleAlert [size]="22"></svg></span>
     <div>
-      <h2 class="ojo__title" [id]="appointment.id + '-title'" tabindex="-1">{{ appointment.title }}</h2>
+      <h2 class="ojo__title" [id]="appointment.id + '-title'" tabindex="-1">
+        {{ appointment.title }}
+      </h2>
       <p class="ojo__description"><app-rich-text [text]="appointment.description" /></p>
     </div>
   </header>

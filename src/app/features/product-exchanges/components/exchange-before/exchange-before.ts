@@ -12,7 +12,13 @@ import { RichTextView } from '../../../../shared/components/rich-text/rich-text'
 /** The two cards of "Cuestiones a tener en cuenta antes de iniciar la gestión del cambio". */
 @Component({
   selector: 'app-exchange-before',
-  imports: [RichTextView, LucideClipboardCheck, LucideNotebookPen, LucideRepeat2, LucideTriangleAlert],
+  imports: [
+    RichTextView,
+    LucideClipboardCheck,
+    LucideNotebookPen,
+    LucideRepeat2,
+    LucideTriangleAlert,
+  ],
   templateUrl: './exchange-before.html',
   styleUrl: './exchange-before.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

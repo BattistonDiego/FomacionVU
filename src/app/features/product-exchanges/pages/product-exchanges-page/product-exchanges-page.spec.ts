@@ -28,13 +28,20 @@ describe('ProductExchangesPage', () => {
   });
 
   it('offers 3 quick-access cards', () => {
-    expect(texts('.quick-nav__title')).toEqual(['Casos sin cambio', 'Pedidos sin EDI', 'Pedidos con EDI']);
+    expect(texts('.quick-nav__title')).toEqual([
+      'Casos sin cambio',
+      'Pedidos sin EDI',
+      'Pedidos con EDI',
+    ]);
   });
 
   it('shows both flows side by side with their incident type and numbered steps', () => {
     const flows = page.querySelectorAll('app-exchange-flow');
     expect(flows.length).toBe(2);
-    expect(texts('.flow__subtitle')).toEqual(['Incidencia tipo «Echange»', 'Incidencia tipo «retractacion»']);
+    expect(texts('.flow__subtitle')).toEqual([
+      'Incidencia tipo «Echange»',
+      'Incidencia tipo «retractacion»',
+    ]);
     expect(texts('.step__number', flows[0])).toEqual(['1', '2', '3', '4', '5']);
     expect(texts('.step__number', flows[1])).toEqual(['1', '2', '3', '4', '5', '6']);
     expect(flows[1].classList).toContain('is-strong');

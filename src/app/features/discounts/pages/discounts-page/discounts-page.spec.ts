@@ -32,7 +32,9 @@ describe('DiscountsPage', () => {
   });
 
   it('renders literal texts without extra spaces around highlighted/flagged terms', () => {
-    expect(text('app-flash-sale-table .result')).toContain('Se aplica el 50 % de la diferencia de precio.');
+    expect(text('app-flash-sale-table .result')).toContain(
+      'Se aplica el 50 % de la diferencia de precio.',
+    );
     expect(text('.proposal__text')).toContain(
       "Se aplica la diferencia de precio (añadiendo un 'déo (término pendiente de confirmación)' en la pestaña de modificaciones) + ESC a SUP SC.",
     );

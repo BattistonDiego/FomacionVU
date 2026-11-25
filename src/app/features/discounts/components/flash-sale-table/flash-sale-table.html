@@ -18,10 +18,13 @@
       @for (row of s.rows; track row.timeSinceOfferEnded) {
         <tr>
           <th scope="row" class="time">{{ row.timeSinceOfferEnded }}</th>
-          @for (cell of [
-            { label: s.columns.inStock, outcome: row.inStock },
-            { label: s.columns.outOfStock, outcome: row.outOfStock }
-          ]; track cell.label) {
+          @for (
+            cell of [
+              { label: s.columns.inStock, outcome: row.inStock },
+              { label: s.columns.outOfStock, outcome: row.outOfStock },
+            ];
+            track cell.label
+          ) {
             <td>
               <span class="cell-label">{{ cell.label }}</span>
               <p class="result"><app-rich-text [text]="cell.outcome.result" /></p>

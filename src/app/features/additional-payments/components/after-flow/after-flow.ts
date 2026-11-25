@@ -15,7 +15,9 @@ import { RichTextView } from '../../../../shared/components/rich-text/rich-text'
       <ol class="flow">
         @for (step of s.steps; track $index; let first = $first) {
           <li class="flow__step" [class.flow__step--first]="first">
-            <span class="flow__marker"><span class="flow__number">{{ $index + 1 }}</span></span>
+            <span class="flow__marker"
+              ><span class="flow__number">{{ $index + 1 }}</span></span
+            >
             <p class="flow__actor">{{ step.actor }}</p>
             <p class="flow__text"><app-rich-text [text]="step.text" /></p>
           </li>

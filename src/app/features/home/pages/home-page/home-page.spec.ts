@@ -22,7 +22,12 @@ describe('HomePage', () => {
   beforeEach(async () => {
     localStorage.clear();
     TestBed.configureTestingModule({
-      providers: [provideRouter([{ path: '', component: HomePage }, { path: '**', children: [] }])],
+      providers: [
+        provideRouter([
+          { path: '', component: HomePage },
+          { path: '**', children: [] },
+        ]),
+      ],
     });
     harness = await RouterTestingHarness.create('/');
     await TestBed.inject(NewsService).ready;
@@ -97,7 +102,9 @@ describe('HomePage', () => {
   it('lists incident types and links to the full search in Incidencias', async () => {
     await search('stock');
     expect(texts('.results .result__title')).toContain('Rotura de stock PR2');
-    expect(page().querySelector('.results__all')?.getAttribute('href')).toBe('/incidencias?q=stock');
+    expect(page().querySelector('.results__all')?.getAttribute('href')).toBe(
+      '/incidencias?q=stock',
+    );
   });
 
   it('says when nothing is found', async () => {
@@ -107,7 +114,9 @@ describe('HomePage', () => {
 
   it('opens the first result with Enter', async () => {
     await search('marketplaces');
-    page().querySelector('input')!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    page()
+      .querySelector('input')!
+      .dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
     await harness.fixture.whenStable();
     expect(TestBed.inject(Router).url).toBe('/descuentos');
   });

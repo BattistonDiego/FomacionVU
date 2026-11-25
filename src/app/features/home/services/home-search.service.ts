@@ -56,7 +56,11 @@ export class HomeSearchService {
     AVAILABLE_MODULES.map((module) => [
       module.path,
       tokenize(
-        [module.label, module.description ?? '', ...collectStrings(MODULE_CONTENT[module.path])].join(' '),
+        [
+          module.label,
+          module.description ?? '',
+          ...collectStrings(MODULE_CONTENT[module.path]),
+        ].join(' '),
       ),
     ]),
   );

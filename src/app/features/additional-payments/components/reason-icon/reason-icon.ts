@@ -9,9 +9,15 @@ import { PaymentReason } from '../../models/additional-payment.model';
   imports: [LucideArrowLeftRight, LucideTruck, LucideWarehouse],
   template: `
     @switch (reason()) {
-      @case ('delivery-change') { <svg lucideArrowLeftRight [size]="size()"></svg> }
-      @case ('storage') { <svg lucideWarehouse [size]="size()"></svg> }
-      @case ('second-delivery') { <svg lucideTruck [size]="size()"></svg> }
+      @case ('delivery-change') {
+        <svg lucideArrowLeftRight [size]="size()"></svg>
+      }
+      @case ('storage') {
+        <svg lucideWarehouse [size]="size()"></svg>
+      }
+      @case ('second-delivery') {
+        <svg lucideTruck [size]="size()"></svg>
+      }
     }
   `,
   styles: ':host { display: inline-flex; }',

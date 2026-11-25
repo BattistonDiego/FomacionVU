@@ -10,7 +10,9 @@
   <ul class="conditions__list">
     @for (item of conditions().items; track item) {
       <li class="conditions__item">
-        <span class="conditions__check"><svg lucideCheck [size]="14" [strokeWidth]="2.25"></svg></span>
+        <span class="conditions__check"
+          ><svg lucideCheck [size]="14" [strokeWidth]="2.25"></svg
+        ></span>
         <span>{{ item }}</span>
       </li>
     }

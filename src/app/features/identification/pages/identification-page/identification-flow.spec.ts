@@ -19,7 +19,9 @@ describe('Identification flow', () => {
   const submitButton = () => root().querySelector<HTMLButtonElement>('button[type="submit"]')!;
 
   const start = async (url: string) => {
-    TestBed.configureTestingModule({ providers: [provideRouter(routes, withComponentInputBinding())] });
+    TestBed.configureTestingModule({
+      providers: [provideRouter(routes, withComponentInputBinding())],
+    });
     harness = await RouterTestingHarness.create(url);
   };
 
@@ -29,7 +31,9 @@ describe('Identification flow', () => {
     await start('/');
     expect(router().url).toBe('/identificacion');
     expect(root().querySelector('h1')?.textContent).toContain('¡Bienvenido a SupportHub!');
-    expect(root().querySelector<HTMLInputElement>('#user-name')?.placeholder).toBe('Introduce tu nombre');
+    expect(root().querySelector<HTMLInputElement>('#user-name')?.placeholder).toBe(
+      'Introduce tu nombre',
+    );
   });
 
   it('8. keeps the button disabled for an empty or blank name', async () => {

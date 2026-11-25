@@ -8,7 +8,8 @@ export const IDENTIFICATION_PATH = 'identificacion';
 
 /** Internal pages: without a saved name, go to the identification screen. */
 export const requireUserGuard: CanActivateFn = () =>
-  inject(UserSessionService).isIdentified() || inject(Router).createUrlTree(['/', IDENTIFICATION_PATH]);
+  inject(UserSessionService).isIdentified() ||
+  inject(Router).createUrlTree(['/', IDENTIFICATION_PATH]);
 
 /** Identification screen: if a name is already saved, go straight to the dashboard. */
 export const guestOnlyGuard: CanActivateFn = () =>

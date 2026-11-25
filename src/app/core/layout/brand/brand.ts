@@ -8,7 +8,9 @@ import { LucideMessageSquareText } from '@lucide/angular';
   imports: [RouterLink, LucideMessageSquareText],
   template: `
     <a routerLink="/" class="brand" aria-label="SupportHub">
-      <span class="brand__logo"><svg lucideMessageSquareText [size]="18" [strokeWidth]="2"></svg></span>
+      <span class="brand__logo"
+        ><svg lucideMessageSquareText [size]="18" [strokeWidth]="2"></svg
+      ></span>
       @if (showName()) {
         <span class="brand__name">SupportHub</span>
       }

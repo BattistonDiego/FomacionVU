@@ -10,7 +10,9 @@
         <span class="swatch" [style.background]="background()" aria-hidden="true"></span>
         <div>
           <p class="category__short">{{ c.shortLabel }}</p>
-          <p class="category__code">{{ c.colorName }} · <span class="code-tag">{{ code() }}</span></p>
+          <p class="category__code">
+            {{ c.colorName }} · <span class="code-tag">{{ code() }}</span>
+          </p>
         </div>
       </div>
       <app-band-example [category]="c" />

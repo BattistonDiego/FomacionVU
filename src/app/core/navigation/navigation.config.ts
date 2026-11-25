@@ -69,7 +69,12 @@ export const OPERATIONS_ITEMS: readonly NavItem[] = [
   },
   // Planned modules (not implemented yet): hidden from the menu, routes kept.
   { label: 'Escalados', path: 'escalados', icon: LucideArrowUpRight, available: false },
-  { label: 'Logística y entregas', path: 'logistica-y-entregas', icon: LucideTruck, available: false },
+  {
+    label: 'Logística y entregas',
+    path: 'logistica-y-entregas',
+    icon: LucideTruck,
+    available: false,
+  },
   { label: 'Códigos postales', path: 'codigos-postales', icon: LucideMapPin, available: false },
 ];
 
@@ -80,4 +85,6 @@ export const NAV_SECTIONS: readonly NavSection[] = [
 ];
 
 /** Implemented operational modules, in menu order (home page cards). */
-export const AVAILABLE_MODULES: readonly NavItem[] = OPERATIONS_ITEMS.filter((item) => item.available);
+export const AVAILABLE_MODULES: readonly NavItem[] = OPERATIONS_ITEMS.filter(
+  (item) => item.available,
+);

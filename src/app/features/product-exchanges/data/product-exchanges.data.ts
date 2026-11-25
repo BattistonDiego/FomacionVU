@@ -99,14 +99,18 @@ export const PRODUCT_EXCHANGES: ProductExchangesContent = {
       {
         icon: 'external-marketplace',
         title: 'Marketplace externo',
-        text: ['Pedidos realizados a través de marketplace externo (Amazon/Worten/carrefour/Allegro…)'],
+        text: [
+          'Pedidos realizados a través de marketplace externo (Amazon/Worten/carrefour/Allegro…)',
+        ],
       },
       {
         icon: 'pickup-point',
         title: 'GLS · Point Relay · Pick up Point',
         text: [
           'No podemos realizar cambio en productos enviados por ',
-          strong('GLS, Point Relay ni Pick up Point (a puntos de entrega) (ni el producto original ni el nuevo)'),
+          strong(
+            'GLS, Point Relay ni Pick up Point (a puntos de entrega) (ni el producto original ni el nuevo)',
+          ),
           ', ',
           strong('salvo si aún no tienen EDI'),
           '.',
@@ -115,7 +119,9 @@ export const PRODUCT_EXCHANGES: ProductExchangesContent = {
       {
         icon: 'pack',
         title: 'Partes de un pack',
-        text: ['Partes de un pack. Si el cliente quiere hacer un cambio hay que cambiar el pack completo.'],
+        text: [
+          'Partes de un pack. Si el cliente quiere hacer un cambio hay que cambiar el pack completo.',
+        ],
       },
       {
         icon: 'payment-method',
@@ -149,7 +155,9 @@ export const PRODUCT_EXCHANGES: ProductExchangesContent = {
     title: 'Cuestiones a tener en cuenta antes de iniciar la gestión del cambio',
     confirm: {
       title: 'Confirmar el nuevo producto',
-      text: ['Antes de gestionar el cambio confirmar bien con el cliente cuál es el nuevo producto'],
+      text: [
+        'Antes de gestionar el cambio confirmar bien con el cliente cuál es el nuevo producto',
+      ],
       items: [
         'tamaño',
         'ángulo',
@@ -167,7 +175,9 @@ export const PRODUCT_EXCHANGES: ProductExchangesContent = {
       text: [
         'Tenemos que evitar hacer cambio sobre cambio, ya que los movimientos contables no quedan limpios, más aún cuando el pago inicial sea en 3 cuotas.',
       ],
-      note: ['Es mejor hacer un nuevo pedido con el cliente en línea y anular el anterior. Aunque podemos hacer excepciones.'],
+      note: [
+        'Es mejor hacer un nuevo pedido con el cliente en línea y anular el anterior. Aunque podemos hacer excepciones.',
+      ],
     },
   },
 
@@ -275,8 +285,14 @@ export const PRODUCT_EXCHANGES: ProductExchangesContent = {
                   ' en la pestaña de “modificaciones”.',
                 ],
               },
-              { kind: 'text', text: ['A tener en cuenta diferentes costes si ya ha sido entregado o todavía no.'] },
-              { kind: 'text', text: ['El cálculo es exactamente igual que si anulase e hiciese un nuevo pedido.'] },
+              {
+                kind: 'text',
+                text: ['A tener en cuenta diferentes costes si ya ha sido entregado o todavía no.'],
+              },
+              {
+                kind: 'text',
+                text: ['El cálculo es exactamente igual que si anulase e hiciese un nuevo pedido.'],
+              },
             ],
           },
           BALEARICS,
@@ -319,7 +335,10 @@ export const PRODUCT_EXCHANGES: ProductExchangesContent = {
       ' y el cliente quiere hacer un cambio, los pasos serían los mismos pero:',
     ],
     items: [
-      { icon: 'no-incident', text: 'No tenemos que abrir ninguna incidencia porque ya está abierta.' },
+      {
+        icon: 'no-incident',
+        text: 'No tenemos que abrir ninguna incidencia porque ya está abierta.',
+      },
       { icon: 'no-cost', text: 'No tenemos que añadir ningún tipo de coste de devolución.' },
     ],
   },

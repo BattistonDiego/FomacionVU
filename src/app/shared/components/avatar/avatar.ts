@@ -16,5 +16,7 @@ export class Avatar {
   readonly name = input.required<string>();
   readonly size = input(32);
 
-  protected readonly initials = computed(() => this.name().trim().charAt(0).toLocaleUpperCase('es-ES'));
+  protected readonly initials = computed(() =>
+    this.name().trim().charAt(0).toLocaleUpperCase('es-ES'),
+  );
 }

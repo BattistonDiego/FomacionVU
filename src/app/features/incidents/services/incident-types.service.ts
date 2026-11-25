@@ -6,7 +6,11 @@ import { formatBonusValue } from '../utils/format-bonus-value';
 import { blocksToPlainText } from '../../../shared/models/content-block.model';
 import { FilterOption } from '../../../shared/models/filter-option.model';
 import { richTextToPlain } from '../../../shared/models/rich-text.model';
-import { matchesAllTermsByPrefix, normalizeForSearch, tokenize } from '../../../shared/utils/search';
+import {
+  matchesAllTermsByPrefix,
+  normalizeForSearch,
+  tokenize,
+} from '../../../shared/utils/search';
 
 /** A term such as "pr1" must match the code exactly, so it does not also return PR12. */
 const CODE_TERM = /^pr\d+$/;

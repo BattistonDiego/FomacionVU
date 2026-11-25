@@ -12,7 +12,11 @@
 
 <!-- Quick access -->
 <nav class="quick-nav" aria-label="Secciones de la página">
-  <button type="button" class="quick-nav__card quick-nav__card--alert card" (click)="goToSection(restrictions.id)">
+  <button
+    type="button"
+    class="quick-nav__card quick-nav__card--alert card"
+    (click)="goToSection(restrictions.id)"
+  >
     <span class="icon-tile quick-nav__icon"><svg lucideBan [size]="18"></svg></span>
     <span class="quick-nav__text">
       <span class="quick-nav__title">Casos sin cambio</span>

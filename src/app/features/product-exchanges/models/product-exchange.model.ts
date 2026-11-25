@@ -64,12 +64,7 @@ export interface BeforeSection {
 }
 
 export type StepIcon =
-  | 'open-incident'
-  | 'add-product'
-  | 'discounts'
-  | 'return-costs'
-  | 'balearics'
-  | 'inform';
+  'open-incident' | 'add-product' | 'discounts' | 'return-costs' | 'balearics' | 'inform';
 
 /** Building blocks of a step, rendered in order. */
 export type StepBlock =

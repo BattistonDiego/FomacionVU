@@ -14,12 +14,24 @@
       <li class="restriction" [class.restriction--wide]="item.wide">
         <span class="icon-tile restriction__icon" aria-hidden="true">
           @switch (item.icon) {
-            @case ('internal-marketplace') { <svg lucideStore [size]="17"></svg> }
-            @case ('external-marketplace') { <svg lucideGlobe [size]="17"></svg> }
-            @case ('pickup-point') { <svg lucideMapPin [size]="17"></svg> }
-            @case ('pack') { <svg lucideBoxes [size]="17"></svg> }
-            @case ('payment-method') { <svg lucideCreditCard [size]="17"></svg> }
-            @case ('financing') { <svg lucideLandmark [size]="17"></svg> }
+            @case ('internal-marketplace') {
+              <svg lucideStore [size]="17"></svg>
+            }
+            @case ('external-marketplace') {
+              <svg lucideGlobe [size]="17"></svg>
+            }
+            @case ('pickup-point') {
+              <svg lucideMapPin [size]="17"></svg>
+            }
+            @case ('pack') {
+              <svg lucideBoxes [size]="17"></svg>
+            }
+            @case ('payment-method') {
+              <svg lucideCreditCard [size]="17"></svg>
+            }
+            @case ('financing') {
+              <svg lucideLandmark [size]="17"></svg>
+            }
           }
         </span>
         <div>
@@ -31,7 +43,9 @@
 
     <li class="restriction restriction--wide restriction--financing">
       <h3 class="financing__title">
-        <span class="financing__icon" aria-hidden="true"><svg lucideLandmark [size]="17"></svg></span>
+        <span class="financing__icon" aria-hidden="true"
+          ><svg lucideLandmark [size]="17"></svg
+        ></span>
         {{ s.financing.title }}
       </h3>
       <div class="financing__options">
@@ -41,7 +55,9 @@
               <svg lucideCircleX class="option__icon" [size]="20" aria-hidden="true"></svg>
             }
             <div>
-              <p class="option__title"><span class="option__marker">{{ option.marker }}</span> {{ option.title }}</p>
+              <p class="option__title">
+                <span class="option__marker">{{ option.marker }}</span> {{ option.title }}
+              </p>
               <p class="option__text"><app-rich-text [text]="option.text" /></p>
             </div>
           </div>

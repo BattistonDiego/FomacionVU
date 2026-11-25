@@ -6,7 +6,9 @@
       type="button"
       class="sidebar__collapse"
       (click)="layout.toggleSidebar()"
-      [attr.aria-label]="layout.sidebarCollapsed() ? 'Expandir menú lateral' : 'Contraer menú lateral'"
+      [attr.aria-label]="
+        layout.sidebarCollapsed() ? 'Expandir menú lateral' : 'Contraer menú lateral'
+      "
       [attr.aria-expanded]="!layout.sidebarCollapsed()"
       aria-controls="app-sidebar"
     >

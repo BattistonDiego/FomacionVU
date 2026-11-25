@@ -11,13 +11,27 @@ describe('DISCOUNTS (content provided by the content owner)', () => {
       richTextToPlain(row.outOfStock.result),
     ]);
     expect(table).toEqual([
-      ['Dentro de las primeras 24 h', 'Se aplica la diferencia de precio.', 'Se aplica la diferencia de precio.'],
-      ['Dentro de los primeros 7 días', 'Se aplica la diferencia de precio.', 'Se aplica el 50 % de la diferencia de precio.'],
-      ['Más de 7 días', 'Se aplica el 50 % de la diferencia de precio.', 'Se aplica el 50 % de la diferencia de precio.'],
+      [
+        'Dentro de las primeras 24 h',
+        'Se aplica la diferencia de precio.',
+        'Se aplica la diferencia de precio.',
+      ],
+      [
+        'Dentro de los primeros 7 días',
+        'Se aplica la diferencia de precio.',
+        'Se aplica el 50 % de la diferencia de precio.',
+      ],
+      [
+        'Más de 7 días',
+        'Se aplica el 50 % de la diferencia de precio.',
+        'Se aplica el 50 % de la diferencia de precio.',
+      ],
     ]);
     for (const row of newOrder.rows) {
       for (const outcome of [row.inStock, row.outOfStock]) {
-        expect(outcome.method).toBe('Añadiendo un código promocional en la pestaña de modificaciones.');
+        expect(outcome.method).toBe(
+          'Añadiendo un código promocional en la pestaña de modificaciones.',
+        );
       }
     }
   });
@@ -33,7 +47,9 @@ describe('DISCOUNTS (content provided by the content owner)', () => {
   it('does not add a 2.ª propuesta for "Entregado entre 14 y 30 días"', () => {
     const last = validatedOrder.scenarios[2];
     expect(last.proposals.length).toBe(1);
-    expect(richTextToPlain(last.proposals[0].text)).toBe('Bono descuento del 10 % de la diferencia*.');
+    expect(richTextToPlain(last.proposals[0].text)).toBe(
+      'Bono descuento del 10 % de la diferencia*.',
+    );
   });
 
   it('keeps "déo" literal, flagged as unconfirmed, and keeps "ESC a SUP SC"', () => {

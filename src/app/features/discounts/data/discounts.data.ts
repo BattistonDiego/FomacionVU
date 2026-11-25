@@ -17,7 +17,10 @@ const PROMO_CODE_METHOD = 'Añadiendo un código promocional en la pestaña de m
 const SECOND_PROPOSAL_CONDITION =
   'Solo si el cliente rechaza la 1.ª propuesta e indica que va a anular la compra.';
 
-const FULL_DIFFERENCE = { result: ['Se aplica la diferencia de precio.'], method: PROMO_CODE_METHOD };
+const FULL_DIFFERENCE = {
+  result: ['Se aplica la diferencia de precio.'],
+  method: PROMO_CODE_METHOD,
+};
 
 const HALF_DIFFERENCE = {
   result: ['Se aplica el ', highlight('50 %'), ' de la diferencia de precio.'],

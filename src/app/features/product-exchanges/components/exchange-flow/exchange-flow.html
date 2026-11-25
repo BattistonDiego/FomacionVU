@@ -11,7 +11,9 @@
     </span>
     <div>
       <h3 class="flow__title" [id]="f.id + '-title'" tabindex="-1">{{ f.title }}</h3>
-      <p class="flow__subtitle">Incidencia tipo <strong>«{{ f.incidentType }}»</strong></p>
+      <p class="flow__subtitle">
+        Incidencia tipo <strong>«{{ f.incidentType }}»</strong>
+      </p>
     </div>
   </header>
 
@@ -23,12 +25,24 @@
           <h4 class="step__title">
             <span class="step__icon" aria-hidden="true">
               @switch (step.icon) {
-                @case ('open-incident') { <svg lucideFilePlus [size]="16"></svg> }
-                @case ('add-product') { <svg lucidePackagePlus [size]="16"></svg> }
-                @case ('discounts') { <svg lucideTicketPercent [size]="16"></svg> }
-                @case ('return-costs') { <svg lucideUndo2 [size]="16"></svg> }
-                @case ('balearics') { <svg lucideShip [size]="16"></svg> }
-                @case ('inform') { <svg lucideMail [size]="16"></svg> }
+                @case ('open-incident') {
+                  <svg lucideFilePlus [size]="16"></svg>
+                }
+                @case ('add-product') {
+                  <svg lucidePackagePlus [size]="16"></svg>
+                }
+                @case ('discounts') {
+                  <svg lucideTicketPercent [size]="16"></svg>
+                }
+                @case ('return-costs') {
+                  <svg lucideUndo2 [size]="16"></svg>
+                }
+                @case ('balearics') {
+                  <svg lucideShip [size]="16"></svg>
+                }
+                @case ('inform') {
+                  <svg lucideMail [size]="16"></svg>
+                }
               }
             </span>
             <span class="visually-hidden">Paso {{ $index + 1 }}: </span>{{ step.title }}

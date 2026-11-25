@@ -18,7 +18,8 @@ export const ADDITIONAL_PAYMENTS: AdditionalPaymentsContent = {
     id: 'procedimiento-general',
     title: 'Procedimiento general',
     summary: 'Importe, línea de pago y escalade a Compta',
-    description: 'Estos son los pasos que debemos seguir para solicitar un pago adicional al cliente.',
+    description:
+      'Estos son los pasos que debemos seguir para solicitar un pago adicional al cliente.',
 
     calculate: {
       title: 'Calcular el importe',
@@ -58,7 +59,11 @@ export const ADDITIONAL_PAYMENTS: AdditionalPaymentsContent = {
 
     escalade: {
       title: 'Abrir escalade a Contabilidad',
-      description: ['Abrir escalade y afectarlo a ', strong('Compta'), " con el asunto 'paiement'."],
+      description: [
+        'Abrir escalade y afectarlo a ',
+        strong('Compta'),
+        " con el asunto 'paiement'.",
+      ],
       assignTo: 'Compta',
       subject: 'paiement',
       textsTitle: 'Texto a escribir en el escalade según el motivo',
@@ -70,7 +75,11 @@ export const ADDITIONAL_PAYMENTS: AdditionalPaymentsContent = {
             'Indicar el tipo de entrega que quiere el cliente y el coste que tiene que pagar.',
           examples: ['LM 36', 'LS 7'],
         },
-        { reason: 'second-delivery', title: 'Segunda entrega', examples: ['deuxième livraison 98,99'] },
+        {
+          reason: 'second-delivery',
+          title: 'Segunda entrega',
+          examples: ['deuxième livraison 98,99'],
+        },
         { reason: 'storage', title: 'Costes de almacenaje', examples: ['frais de stockage 37,40'] },
       ],
     },
@@ -79,7 +88,10 @@ export const ADDITIONAL_PAYMENTS: AdditionalPaymentsContent = {
   after: {
     title: '¿Qué ocurre después?',
     steps: [
-      { actor: 'Agente', text: ['El agente abre el escalade a Compta con el asunto "', code('paiement'), '".'] },
+      {
+        actor: 'Agente',
+        text: ['El agente abre el escalade a Compta con el asunto "', code('paiement'), '".'],
+      },
       {
         actor: 'Contabilidad',
         text: ['Contabilidad prepara todo para que el cliente pueda realizar el pago.'],
@@ -145,7 +157,11 @@ export const ADDITIONAL_PAYMENTS: AdditionalPaymentsContent = {
         label: 'Escenario B',
         title: 'Si faltan más de 72 horas para la entrega',
         tone: 'normal',
-        text: ['El procedimiento será el normal, pasando ', strong('primero por Contabilidad'), '.'],
+        text: [
+          'El procedimiento será el normal, pasando ',
+          strong('primero por Contabilidad'),
+          '.',
+        ],
         order: ['Primero Contabilidad', 'Después el pago del cliente', 'Gestión de LOG'],
         alert: {
           title: '¡IMPORTANTE!',

@@ -9,8 +9,17 @@
   <ul class="index__grid">
     @for (category of categories; track category.id) {
       <li>
-        <button type="button" class="chip card" (click)="goTo(category.id)" [attr.title]="category.title">
-          <span class="chip__swatch" [style.background]="background(category.swatch)" aria-hidden="true"></span>
+        <button
+          type="button"
+          class="chip card"
+          (click)="goTo(category.id)"
+          [attr.title]="category.title"
+        >
+          <span
+            class="chip__swatch"
+            [style.background]="background(category.swatch)"
+            aria-hidden="true"
+          ></span>
           <span class="chip__text">
             <span class="chip__label">{{ category.shortLabel }}</span>
             <span class="chip__code">{{ code(category.swatch) }}</span>

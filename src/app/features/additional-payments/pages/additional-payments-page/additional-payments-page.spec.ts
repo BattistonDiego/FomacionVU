@@ -41,7 +41,9 @@ describe('AdditionalPaymentsPage', () => {
   });
 
   it('keeps literal text around bold words (no extra spaces)', () => {
-    expect(texts('.step__description')[2]).toBe("Abrir escalade y afectarlo a Compta con el asunto 'paiement'.");
+    expect(texts('.step__description')[2]).toBe(
+      "Abrir escalade y afectarlo a Compta con el asunto 'paiement'.",
+    );
   });
 
   it('renders the two scenarios with their own order and alert', () => {
